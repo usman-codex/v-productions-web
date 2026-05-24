@@ -1,13 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   typescript: {
-    // Ye line build ke waqt type errors ko ignore karegi
     ignoreBuildErrors: true,
   },
-  eslint: {
-    // Ye line build ke waqt lint errors ko ignore karegi
-    ignoreDuringBuilds: true,
-  },
+  // eslint ko config se hata diya kyunke naye versions mein ye yahan support nahi hota
 };
 
 export default nextConfig;
