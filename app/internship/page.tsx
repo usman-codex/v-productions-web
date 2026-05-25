@@ -3,28 +3,45 @@ import { useState, useEffect } from "react";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { supabase } from "@/lib/supabase";
-import { ChevronDown, GraduationCap, Briefcase, Rocket, CheckCircle, Send, X, Loader2, UploadCloud, Target, Award, Users } from "lucide-react";
-
+import { ChevronDown, GraduationCap, Briefcase, CheckCircle, X, Loader2, UploadCloud, Clock, Target, Award, Rocket, Users, Code2, Database, Palette, BarChart3, Smartphone, Layers } from "lucide-react";
+export const dynamic = "force-dynamic";
+// Themes Mapping
 const cardThemes: any = {
-  purple: { bg: "bg-[#2d1b69]/20", border: "border-purple-500/30", text: "text-purple-400", icon: "bg-purple-500/20" },
-  gold: { bg: "bg-[#69541b]/20", border: "border-gold/30", text: "text-gold", icon: "bg-gold/20" },
-  blue: { bg: "bg-[#1b4369]/20", border: "border-blue-500/30", text: "text-blue-400", icon: "bg-blue-500/20" },
-  green: { bg: "bg-[#1b693e]/20", border: "border-green-500/30", text: "text-green-400", icon: "bg-green-500/20" },
+  purple: { bg: "bg-[#4f46e5]", tagBg: "bg-[#1e1b4b]", tagText: "text-[#818cf8]", icon: Code2 },
+  gold: { bg: "bg-[#fbbf24]", tagBg: "bg-[#451a03]", tagText: "text-[#fbbf24]", icon: Database },
+  blue: { bg: "bg-[#0ea5e9]", tagBg: "bg-[#082f49]", tagText: "text-[#38bdf8]", icon: Palette },
+  green: { bg: "bg-[#10b981]", tagBg: "bg-[#064e3b]", tagText: "text-[#34d399]", icon: BarChart3 },
+  indigo: { bg: "bg-[#6366f1]", tagBg: "bg-[#1e1b4b]", tagText: "text-[#a5b4fc]", icon: Smartphone },
+  amber: { bg: "bg-[#f59e0b]", tagBg: "bg-[#451a03]", tagText: "text-[#fbbf24]", icon: Layers },
 };
 
 export default function InternshipPage() {
   const [internships, setInternships] = useState<any[]>([]);
-  const [expandedId, setExpandedId] = useState<number | null>(null); // Only one ID at a time
+  const [loading, setLoading] = useState(true);
+  const [expandedId, setExpandedId] = useState<string | null>(null); // State for individual expansion
   const [showForm, setShowForm] = useState(false);
   const [selectedRole, setSelectedRole] = useState("");
   const [selectedFile, setSelectedFile] = useState<string>("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isGlobalOpen, setIsGlobalOpen] = useState(false); // Global Status
 
   useEffect(() => { fetchData(); }, []);
 
   async function fetchData() {
-    const { data } = await supabase.from('internships').select('*').order('created_at', { ascending: false });
-    if (data) setInternships(data);
+    setLoading(true);
+    try {
+      // 1. Fetch Global Status from DB
+      const { data: status } = await supabase.from('global_settings').select('value').eq('key', 'internship_status').single();
+      if (status) setIsGlobalOpen(status.value === 'open');
+
+      // 2. Fetch Internship Cards
+      const { data } = await supabase.from('internships').select('*').order('created_at', { ascending: false });
+      if (data) setInternships(data);
+    } catch (error) {
+      console.error("Fetch error:", error);
+    } finally {
+      setLoading(false);
+    }
   }
 
   const handleApply = async (e: any) => {
@@ -41,103 +58,161 @@ export default function InternshipPage() {
         const { data: pUrl } = supabase.storage.from('cv_storage').getPublicUrl(fileName);
         cvUrl = pUrl.publicUrl;
       }
-
-      const { error } = await supabase.from("applicants").insert([{
-        name: formData.get("name"),
+      await supabase.from("applicants").insert([{
+        name: formData.get("name"), 
         email: formData.get("email"),
-        whatsapp: formData.get("whatsapp"),
+        whatsapp: formData.get("whatsapp"), 
         role_applied: selectedRole,
-        cv_url: cvUrl,
+        cv_url: cvUrl, 
         status: "pending"
       }]);
-
-      if (error) throw error;
       alert("🎉 Success! Your application has been submitted.");
-      setShowForm(false); // Success hone par popup band
-      setSelectedFile(""); // Clear file name
-    } catch (err: any) {
-      alert("❌ Error: " + err.message);
-    } finally {
-      setIsSubmitting(false);
-    }
+      setShowForm(false);
+      setSelectedFile("");
+    } catch (err: any) { alert("❌ Error: " + err.message); } 
+    finally { setIsSubmitting(false); }
   };
 
   return (
-    <main className="min-h-screen bg-[#060610] text-white pt-20">
+    <main className="min-h-screen bg-[#060610] text-white pt-32"> {/* Spacing Fix for Navbar */}
       <Header />
       
-      {/* Hero Section */}
-      <section className="py-24 text-center container mx-auto px-4">
-        <h1 className="text-6xl md:text-8xl font-black mb-6 tracking-tighter leading-[0.9]">
-          Shape Your Future with <br/> 
-          <span className="text-gold">V-Productions</span>
-        </h1>
-        <p className="text-muted-foreground text-lg max-w-3xl mx-auto leading-relaxed">
-          Join a team that values innovation, mentorship, and real-world experience.
+      {/* 1. Hero Section */}
+      <section className="pb-20 text-center container mx-auto px-4">
+        {/* Horizontal Circle Status Badge */}
+        <div className={`inline-flex items-center gap-2 px-5 py-2 rounded-full border mb-8 transition-all duration-500 ${isGlobalOpen && internships.length > 0 ? 'bg-green-500/10 border-green-500/30 text-green-400' : 'bg-red-500/10 border-red-500/30 text-red-400'}`}>
+            <span className={`w-2.5 h-2.5 rounded-full ${isGlobalOpen && internships.length > 0 ? 'bg-green-500 animate-pulse' : 'bg-red-500'}`}></span>
+            <span className="text-xs font-bold uppercase tracking-[0.2em]">
+                Internships: {isGlobalOpen && internships.length > 0 ? 'Currently Open' : 'Closed'}
+            </span>
+        </div>
+
+        <h1 className="text-5xl md:text-7xl font-bold mb-6 tracking-tight">Open Internship <span className="text-white">Positions</span></h1>
+        <p className="text-gray-400 text-lg max-w-3xl mx-auto font-medium leading-relaxed">
+          Explore our diverse internship opportunities and find the perfect match for your career goals.
         </p>
       </section>
 
-      {/* Grid Section */}
-      <div className="container mx-auto px-4 space-y-12 pb-24">
-        <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-8">
-          {internships.map((pos) => {
-            const theme = cardThemes[pos.color] || cardThemes.purple;
-            const isExpanded = expandedId === pos.id;
-            return (
-              <div key={pos.id} className={`glass rounded-[2rem] border-t-4 ${theme.border} bg-[#111122]/50 p-8 transition-all duration-500 group`}>
-                <div className="flex justify-between items-start mb-8">
-                  <div className={`p-4 rounded-2xl ${theme.icon} ${theme.text}`}><Briefcase size={32} /></div>
-                  <div className="text-right">
-                    <h3 className="text-2xl font-bold leading-tight">{pos.title}</h3>
-                    <p className="text-sm opacity-60 flex items-center justify-end gap-2 mt-1"><Target size={14}/> {pos.duration}</p>
+      {/* 2. Grid (Conditional Display) */}
+      <div className="container mx-auto px-4 pb-20">
+        {loading ? (
+            <div className="flex justify-center py-20"><Loader2 className="animate-spin text-gold" size={40}/></div>
+        ) : isGlobalOpen && internships.length > 0 ? (
+          <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-8">
+            {internships.map((pos) => {
+              const theme = cardThemes[pos.color] || cardThemes.purple;
+              const IconComp = theme.icon;
+              const isExpanded = expandedId === pos.id;
+              return (
+                <div key={pos.id} className="rounded-3xl overflow-hidden border border-white/5 bg-[#0d0d1a] flex flex-col group transition-all hover:border-white/10">
+                  {/* Card Header */}
+                  <div className={`${theme.bg} p-6 flex items-center gap-5`}>
+                     <div className="bg-white/20 p-4 rounded-2xl backdrop-blur-md">
+                        <IconComp size={32} className="text-white"/>
+                     </div>
+                     <div>
+                        <h3 className="text-2xl font-bold text-white leading-tight">{pos.title}</h3>
+                        <p className="text-white/80 text-sm flex items-center gap-2 mt-1 font-medium"><Clock size={16}/> {pos.duration}</p>
+                     </div>
                   </div>
-                </div>
 
-                <button 
-                  onClick={() => setExpandedId(isExpanded ? null : pos.id)}
-                  className="w-full py-4 border border-gold/30 rounded-2xl flex items-center justify-between px-6 text-sm font-bold hover:bg-gold/10 transition-all"
-                >
-                  {isExpanded ? "Hide Details" : "View Requirements"}
-                  <ChevronDown className={`transition-transform duration-500 ${isExpanded ? 'rotate-180' : ''}`} />
-                </button>
-
-                <div className={`overflow-hidden transition-all duration-700 ${isExpanded ? 'max-h-[1200px] opacity-100 mt-8' : 'max-h-0 opacity-0'}`}>
-                  <div className="space-y-8 border-t border-white/5 pt-8">
-                    <div>
-                      <h4 className="text-gold font-bold flex items-center gap-2 mb-4 uppercase text-[10px] tracking-widest"><GraduationCap size={16}/> Eligibility</h4>
-                      {pos.eligibility?.map((e: string) => <p key={e} className="flex gap-3 text-sm text-muted-foreground mb-3"><CheckCircle className="text-gold shrink-0 mt-0.5" size={16}/> {e}</p>)}
+                  {/* Card Body */}
+                  <div className="p-6 flex flex-col h-full">
+                    {/* Tags */}
+                    <div className="flex flex-wrap gap-2 mb-4">
+                        {pos.skills?.map((s:string) => (
+                           <span key={s} className={`text-[11px] font-bold px-4 py-2 rounded-full uppercase tracking-widest ${theme.tagBg} ${theme.tagText}`}>
+                             {s}
+                           </span>
+                        ))}
                     </div>
+
                     <button 
-                      onClick={() => {setSelectedRole(pos.title); setShowForm(true);}}
-                      className="w-full py-5 bg-gold text-[#060610] font-black rounded-2xl text-lg hover:shadow-[0_0_40px_rgba(212,175,55,0.4)] transition-all"
+                      onClick={() => setExpandedId(isExpanded ? null : pos.id)}
+                      className="w-full py-4 border border-gold/40 rounded-xl flex items-center justify-between px-6 text-sm font-bold text-gold hover:bg-gold/5 transition-all"
                     >
-                      Enroll Now
+                      {isExpanded ? "Hide Details" : "View Requirements"}
+                      <ChevronDown className={`transition-transform duration-500 ${isExpanded ? 'rotate-180' : ''}`} />
                     </button>
+
+                    {/* Expandable Details */}
+                    <div className={`overflow-hidden transition-all duration-700 ${isExpanded ? 'max-h-[1500px] opacity-100 mt-10' : 'max-h-0 opacity-0'}`}>
+                        <div className="space-y-10">
+                            {/* Eligibility */}
+                            <div className="space-y-4">
+                                <h4 className="text-gold font-bold flex items-center gap-2 uppercase text-[11px] tracking-[0.2em]"><GraduationCap size={18}/> Eligibility</h4>
+                                {pos.eligibility?.map((e: string) => <p key={e} className="flex gap-4 text-sm text-gray-400 leading-relaxed"><CheckCircle className="text-gold shrink-0 mt-0.5" size={18}/> {e}</p>)}
+                            </div>
+                            
+                            {/* What You Will Do */}
+                            <div className="space-y-4">
+                                <h4 className="text-blue-400 font-bold flex items-center gap-2 uppercase text-[11px] tracking-[0.2em]"><Target size={18}/> What You Will Do</h4>
+                                {pos.tasks?.map((t: string) => <p key={t} className="flex gap-4 text-sm text-gray-400 leading-relaxed"><CheckCircle className="text-blue-400 shrink-0 mt-0.5" size={18}/> {t}</p>)}
+                            </div>
+
+                            {/* Dynamic Benefits */}
+                            <div className="space-y-4">
+                                <h4 className="text-green-400 font-bold flex items-center gap-2 uppercase text-[11px] tracking-[0.2em]"><Award size={18}/> Benefits</h4>
+                                {pos.benefits?.map((b: string) => (
+                                  <p key={b} className="flex gap-4 text-sm text-gray-400 leading-relaxed"><CheckCircle className="text-green-400 shrink-0 mt-0.5" size={18}/> {b}</p>
+                                ))}
+                            </div>
+
+                            <button onClick={() => {setSelectedRole(pos.title); setShowForm(true);}} className="w-full py-5 bg-gold text-black font-black rounded-xl text-lg hover:brightness-110 transition-all shadow-xl">Enroll Now</button>
+                        </div>
+                    </div>
                   </div>
                 </div>
-              </div>
-            );
-          })}
-        </div>
+              );
+            })}
+          </div>
+        ) : (
+          /* Coming Soon Message */
+          <div className="max-w-2xl mx-auto text-center py-32 bg-[#0d0d1a] rounded-[4rem] border border-white/5 relative overflow-hidden">
+             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-gold/50 to-transparent"></div>
+             <h2 className="text-4xl font-black text-white mb-4 italic">Waiting... Coming Soon!</h2>
+             <p className="text-gray-400 max-w-md mx-auto">We are currently not accepting applications. Please stay tuned for our next batch announcement.</p>
+          </div>
+        )}
       </div>
 
-      {/* 4. Enrollment Popup - Fixed Scrollbar */}
+      {/* 3. Bottom Static Benefits Grid */}
+      <section className="container mx-auto px-4 py-24 border-t border-white/5">
+        <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-8">
+            {[
+                { icon: <Users size={32}/>, title: "1:1 Mentorship", desc: "Personal guidance from industry experts" },
+                { icon: <Award size={32}/>, title: "Certificate", desc: "Industry-recognized certification" },
+                { icon: <Briefcase size={32}/>, title: "Job Offer", desc: "Potential full-time opportunity" },
+                { icon: <Rocket size={32}/>, title: "Live Projects", desc: "Work on real client projects" }
+            ].map((item, i) => (
+                <div key={i} className="bg-[#0d0d1a] border border-white/5 p-10 rounded-[2.5rem] text-center group hover:border-gold/30 transition-all">
+                    <div className="bg-gold/10 w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-6 text-gold group-hover:scale-110 transition-transform">
+                        {item.icon}
+                    </div>
+                    <h4 className="text-xl font-bold mb-2">{item.title}</h4>
+                    <p className="text-sm text-gray-500 leading-relaxed font-medium">{item.desc}</p>
+                </div>
+            ))}
+        </div>
+      </section>
+
+      {/* 4. Enrollment Form Popup */}
       {showForm && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/90 backdrop-blur-xl">
-          <div className="glass w-full max-w-2xl rounded-[3rem] p-8 md:p-16 relative border-gold/20 animate-scale-up overflow-y-auto max-h-[95vh] scrollbar-hide" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
-            <button onClick={() => setShowForm(false)} className="absolute top-8 right-8 text-muted-foreground hover:text-white"><X size={32}/></button>
-            <h2 className="text-4xl font-bold mb-4">Enroll for <span className="text-gold">{selectedRole}</span></h2>
-            <form onSubmit={handleApply} className="grid md:grid-cols-2 gap-6 mt-8">
-              <input name="name" type="text" placeholder="Full Name *" className="bg-white/5 border border-white/10 rounded-2xl p-5 focus:border-gold outline-none" required />
-              <input name="email" type="email" placeholder="Email Address *" className="bg-white/5 border border-white/10 rounded-2xl p-5 focus:border-gold outline-none" required />
-              <input name="whatsapp" type="text" placeholder="WhatsApp Number *" className="bg-white/5 border border-white/10 rounded-2xl p-5 focus:border-gold outline-none" required />
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/95 backdrop-blur-md">
+          <div className="bg-[#0d0d1a] w-full max-w-2xl rounded-[2.5rem] p-10 md:p-16 relative border border-white/10 overflow-y-auto max-h-[90vh]">
+            <button onClick={() => setShowForm(false)} className="absolute top-8 right-8 text-gray-500 hover:text-white transition-colors"><X size={32}/></button>
+            <h2 className="text-4xl font-bold mb-2">Apply for <span className="text-gold">{selectedRole}</span></h2>
+            <form onSubmit={handleApply} className="grid md:grid-cols-2 gap-6 mt-10">
+              <input name="name" type="text" placeholder="Full Name *" className="bg-white/5 border border-white/10 rounded-xl p-5 outline-none focus:border-gold text-white" required />
+              <input name="email" type="email" placeholder="Email *" className="bg-white/5 border border-white/10 rounded-xl p-5 outline-none focus:border-gold text-white" required />
+              <input name="whatsapp" type="text" placeholder="WhatsApp Number *" className="bg-white/5 border border-white/10 rounded-xl p-5 outline-none focus:border-gold text-white" required />
               <div className="md:col-span-2">
                 <input name="cv" type="file" id="cv_up" className="hidden" accept=".pdf" onChange={(e:any) => setSelectedFile(e.target.files[0]?.name)} required />
-                <label htmlFor="cv_up" className="p-8 border-2 border-dashed border-white/10 rounded-[2rem] flex flex-col items-center gap-4 cursor-pointer hover:border-gold/50 transition-all bg-white/5">
-                  {selectedFile ? <><CheckCircle className="text-green-400" size={40}/> <span className="font-bold">{selectedFile}</span></> : <><UploadCloud className="text-gold" size={40}/> <span className="font-bold text-center">Upload Resume/CV (PDF Only)</span></>}
+                <label htmlFor="cv_up" className="p-8 border-2 border-dashed border-white/10 rounded-2xl flex flex-col items-center gap-4 cursor-pointer hover:border-gold/50 bg-white/5 transition-all">
+                  {selectedFile ? <><CheckCircle className="text-green-400" size={40}/> <span className="font-bold text-white">{selectedFile}</span></> : <><UploadCloud className="text-gold" size={40}/> <span className="font-bold text-gray-400">Upload Resume (PDF Only)</span></>}
                 </label>
               </div>
-              <button disabled={isSubmitting} className="md:col-span-2 py-5 bg-gold text-black font-black rounded-2xl text-xl mt-4 flex justify-center items-center gap-2">
+              <button disabled={isSubmitting} className="md:col-span-2 py-5 bg-gold text-black font-black rounded-xl text-xl mt-4 flex justify-center items-center shadow-lg transition-all">
                 {isSubmitting ? <Loader2 className="animate-spin"/> : "Submit Application"}
               </button>
             </form>
