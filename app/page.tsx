@@ -2,10 +2,10 @@ import { Header } from "@/components/header";
 import { HeroSection } from "@/components/hero-section";
 import { IntroSection } from "@/components/intro-section";
 import { StatsCounter } from "@/components/stats-counter";
-import { TechStack } from "@/components/tech-stack";
+
 import { ExpertiseGrid } from "@/components/expertise-grid";
 import { TrustSection } from "@/components/trust-section";
-import { TechMarquee } from "@/components/tech-marquee";
+
 import { IndustrySolutions } from "@/components/industry-solutions";
 import { EngagementModels } from "@/components/engagement-models";
 import { TrainingServices } from "@/components/training-services";
@@ -21,10 +21,10 @@ export default function Home() {
       <HeroSection />
       <IntroSection />
       <StatsCounter />
-      <TechStack />
+     
       <ExpertiseGrid />
       <TrustSection />
-      <TechMarquee />
+      
       <IndustrySolutions />
       <EngagementModels />
       <TrainingServices />

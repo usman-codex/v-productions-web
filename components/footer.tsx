@@ -105,14 +105,13 @@ export function Footer() {
                 <li className="flex items-start gap-3">
                   <MapPin className="h-5 w-5 text-gold mt-0.5" />
                   <span className="text-muted-foreground text-sm">
-                    350 Fifth Avenue, Suite 4200<br />
-                    New York, NY 10118
+                    Office #225, Pace Center, Model Town link Road, Lahore.
                   </span>
                 </li>
                 <li className="flex items-center gap-3">
                   <Phone className="h-5 w-5 text-gold" />
                   <a href="tel:+1234567890" className="text-muted-foreground hover:text-gold transition-colors text-sm">
-                    +1 (234) 567-890
+                    0320-4731582
                   </a>
                 </li>
                 <li className="flex items-center gap-3">

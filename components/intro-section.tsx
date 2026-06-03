@@ -1,6 +1,5 @@
 "use client";
 
-import { Play } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const products = [
@@ -12,33 +11,29 @@ const products = [
 
 export function IntroSection() {
   return (
-    <section className="py-24 bg-card relative overflow-hidden">
+    // Gap kam karne ke liye py-24 ko pt-6 pb-20 kar diya gaya hai
+    <section className="pt-6 pb-20 bg-card relative overflow-hidden">
       {/* Decorative Elements */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-purple-deep/20 rounded-full blur-3xl" />
       <div className="absolute bottom-0 left-0 w-64 h-64 bg-blue-electric/10 rounded-full blur-3xl" />
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Video Section */}
+          
+          {/* Image Section (Video aur Watch-time remove kar diya) */}
           <div className="relative group">
-            <div className="aspect-video bg-gradient-to-br from-purple-deep to-blue-electric rounded-2xl overflow-hidden relative">
-              <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&q=80')] bg-cover bg-center opacity-50" />
-              <div className="absolute inset-0 bg-gradient-to-br from-purple-deep/60 to-blue-electric/60" />
-
-              {/* Play Button */}
-              <button
-                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 rounded-full bg-gold flex items-center justify-center golden-glow group-hover:scale-110 transition-transform duration-300"
-                aria-label="Play video"
-              >
-                <Play className="h-8 w-8 text-accent-foreground ml-1" fill="currentColor" />
-              </button>
+            <div className="aspect-video rounded-3xl overflow-hidden border border-white/10 shadow-2xl relative">
+              <img 
+                src="/about-us.jpg" // Local memory (public folder) se image
+                alt="About V-Productions"
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+              {/* Soft Gradient Overlay for professional look */}
+              <div className="absolute inset-0 bg-gradient-to-tr from-purple-deep/40 to-transparent pointer-events-none" />
             </div>
-
-            {/* Video Caption */}
-            <div className="absolute -bottom-4 -right-4 bg-card border border-border rounded-lg px-4 py-2 shadow-lg">
-              <p className="text-sm text-muted-foreground">Watch our story</p>
-              <p className="text-gold font-semibold">2:30 min</p>
-            </div>
+            
+            {/* Chota decorative element video caption ki jagah */}
+            <div className="absolute -bottom-4 -left-4 bg-gold w-20 h-20 rounded-2xl -z-10 opacity-50 blur-xl animate-pulse" />
           </div>
 
           {/* Content Section */}
@@ -49,7 +44,7 @@ export function IntroSection() {
               <span className="gradient-text">Needs</span>
             </h2>
 
-            <p className="text-lg text-muted-foreground">
+            <p className="text-lg text-muted-foreground leading-relaxed">
               We deliver comprehensive digital solutions that drive growth and efficiency. Our team of experts crafts tailored software that transforms the way you do business.
             </p>
 
@@ -57,7 +52,7 @@ export function IntroSection() {
               {products.map((product, index) => (
                 <div
                   key={index}
-                  className="flex items-start gap-4 p-4 rounded-xl glass hover:bg-gold/5 transition-colors group cursor-pointer"
+                  className="flex items-start gap-4 p-4 rounded-xl glass border border-white/5 hover:border-gold/30 hover:bg-gold/5 transition-all duration-300 group cursor-default"
                 >
                   <div className="w-6 h-6 rounded-full bg-gold/20 flex items-center justify-center mt-1 group-hover:bg-gold/40 transition-colors">
                     <svg
@@ -82,7 +77,7 @@ export function IntroSection() {
               ))}
             </div>
 
-            <Button className="bg-gold text-accent-foreground hover:bg-gold-light font-semibold mt-4">
+            <Button className="bg-gold text-accent-foreground hover:bg-gold-light font-bold px-8 py-6 rounded-2xl shadow-lg shadow-gold/20 transition-all">
               Explore Solutions
             </Button>
           </div>

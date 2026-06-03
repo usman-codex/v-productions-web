@@ -35,10 +35,8 @@ const partners = [
 ];
 
 export function GlobalLocations() {
-  // 1. Create a state to track if the component has loaded in the browser
   const [mounted, setMounted] = useState(false);
 
-  // 2. Set mounted to true once the component has loaded
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -65,10 +63,8 @@ export function GlobalLocations() {
               key={index}
               className="glass rounded-2xl p-6 hover:scale-105 transition-all duration-300 golden-glow-hover group"
             >
-              {/* City Skyline Placeholder */}
               <div className="h-24 bg-gradient-to-t from-purple-deep/20 to-transparent rounded-xl mb-6 flex items-end justify-center overflow-hidden">
                 <div className="flex items-end gap-1 pb-2">
-                  {/* 3. ONLY render the random bars if mounted is true */}
                   {mounted && [...Array(7)].map((_, i) => (
                     <div
                       key={i}
@@ -79,7 +75,6 @@ export function GlobalLocations() {
                       }}
                     />
                   ))}
-                  {/* 4. Show fixed empty bars on the server so the layout doesn't jump */}
                   {!mounted && [...Array(7)].map((_, i) => (
                     <div
                       key={i}
@@ -118,7 +113,7 @@ export function GlobalLocations() {
           ))}
         </div>
 
-        {/* Strategic Partners */}
+        {/* Strategic Partners & Google Map */}
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Partner Info */}
           <div className="space-y-6">
@@ -141,21 +136,20 @@ export function GlobalLocations() {
             </div>
           </div>
 
-          {/* Map Placeholder */}
+          {/* REAL GOOGLE MAP INTEGRATION */}
           <div className="relative">
-            <div className="aspect-[4/3] rounded-2xl overflow-hidden bg-muted">
-              <div className="w-full h-full bg-gradient-to-br from-purple-deep/30 to-blue-electric/20 flex items-center justify-center">
-                <div className="text-center">
-                  <MapPin className="h-12 w-12 text-gold mx-auto mb-4" />
-                  <p className="text-muted-foreground">Interactive Map</p>
-                  <p className="text-sm text-muted-foreground/60">Click to explore our locations</p>
-                </div>
-              </div>
+            <div className="aspect-[4/3] rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
+              <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2751.6098772675728!2d74.31278917650147!3d31.4703650832057!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x391907dc891efad1%3A0x10745ba01f02e684!2sPace%20Shopping%20Mall!5e1!3m2!1sen!2s!4v1780303464668!5m2!1sen!2s" 
+                width="100%" 
+                height="100%" 
+                style={{ border: 0, filter: 'invert(90%) hue-rotate(180deg) brightness(95%) contrast(90%)' }} 
+                allowFullScreen={true} 
+                loading="lazy" 
+                referrerPolicy="no-referrer-when-downgrade"
+              />
             </div>
-            <div className="absolute -bottom-4 -right-4 bg-gold rounded-xl p-4 shadow-lg">
-              <p className="text-accent-foreground font-bold">3+</p>
-              <p className="text-accent-foreground/80 text-xs">Global Offices</p>
-            </div>
+            
           </div>
         </div>
       </div>

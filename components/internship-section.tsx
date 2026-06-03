@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import Link from "next/link"; // Link import kiya gaya hai navigation ke liye
 
 const benefits = [
   "Real-world project experience with industry mentors",
@@ -56,19 +57,17 @@ export function InternshipSection() {
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
-              <Button
-                size="lg"
-                className="bg-gold text-accent-foreground hover:bg-gold-light font-semibold golden-glow-hover"
-              >
-                Apply Now
-              </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                className="border-blue-electric text-blue-electric hover:bg-blue-electric/10"
-              >
-                View Program Details
-              </Button>
+              {/* Apply Now button ab Internship page par le jayega */}
+              <Link href="/internship">
+                <Button
+                  size="lg"
+                  className="bg-gold text-accent-foreground hover:bg-gold-light font-semibold golden-glow-hover w-full sm:w-auto"
+                >
+                  Apply Now
+                </Button>
+              </Link>
+              
+              {/* View Program Details button remove kar diya gaya hai */}
             </div>
           </div>
 

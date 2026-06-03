@@ -1,7 +1,6 @@
 "use client";
 
-import { useRef, useEffect, useState } from "react";
-import { use } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
@@ -26,528 +25,33 @@ import {
   Stethoscope,
   FileText,
   LineChart,
+  Server,
+  Terminal,
+  Workflow,
+  TrendingUp,
+  Share2,
+  PenTool,
+  Users,
+  Target,
+  Activity,
+  CloudCog,
+  ShieldCheck,
+  Globe2,
+  Monitor,
+  Component,
+  Laptop,
+  AppWindow,
+  Briefcase,
 } from "lucide-react";
 
-// Service data configuration
-const servicesData: Record<string, ServiceData> = {
-  "web-development": {
-    title: "Web Development",
-    tagline: "Building Digital Experiences That Convert",
-    heroImage: "/services/web-dev-hero.jpg",
-    introduction: [
-      "In today's digital-first world, your website is often the first impression customers have of your business. Our web development services combine cutting-edge technology with stunning design to create websites that not only look amazing but also drive real business results.",
-      "From responsive corporate websites to complex web applications, our team of expert developers uses the latest frameworks and best practices to deliver solutions that are fast, secure, and scalable. We focus on user experience, performance optimization, and SEO-friendly architecture to ensure your web presence stands out.",
-    ],
-    expertise: [
-      {
-        icon: Palette,
-        title: "Responsive Design",
-        description: "Pixel-perfect designs that look stunning on every device and screen size.",
-      },
-      {
-        icon: Zap,
-        title: "API Integration",
-        description: "Seamless integration with third-party services, payment gateways, and CRMs.",
-      },
-      {
-        icon: Globe,
-        title: "E-commerce Solutions",
-        description: "High-converting online stores with secure checkout and inventory management.",
-      },
-      {
-        icon: Shield,
-        title: "Security First",
-        description: "Enterprise-grade security with SSL, data encryption, and regular audits.",
-      },
-    ],
-    techStack: ["React", "Next.js", "Node.js", "TypeScript", "Tailwind CSS", "PostgreSQL", "MongoDB", "AWS"],
-    process: [
-      { step: "Discovery", description: "Understanding your goals, audience, and requirements" },
-      { step: "Design", description: "Creating wireframes and visual mockups for approval" },
-      { step: "Development", description: "Building your solution with clean, maintainable code" },
-      { step: "QA Testing", description: "Rigorous testing across browsers and devices" },
-      { step: "Deployment", description: "Launching with monitoring and support" },
-    ],
-  },
-  "mobile-apps": {
-    title: "Mobile Apps",
-    tagline: "Native & Cross-Platform Excellence",
-    heroImage: "/services/mobile-hero.jpg",
-    introduction: [
-      "Mobile apps have become essential for businesses looking to engage customers on their preferred devices. Our mobile development team creates intuitive, high-performance applications that users love to use and recommend.",
-      "Whether you need a native iOS app, an Android application, or a cross-platform solution, we leverage the latest technologies like Flutter and React Native to deliver apps that feel native while maximizing development efficiency.",
-    ],
-    expertise: [
-      {
-        icon: Smartphone,
-        title: "Native Development",
-        description: "Platform-optimized apps for iOS (Swift) and Android (Kotlin).",
-      },
-      {
-        icon: Layers,
-        title: "Cross-Platform",
-        description: "Single codebase solutions with Flutter and React Native.",
-      },
-      {
-        icon: Zap,
-        title: "Performance",
-        description: "Optimized for speed, battery life, and smooth animations.",
-      },
-      {
-        icon: Shield,
-        title: "App Security",
-        description: "Secure data storage, biometric auth, and encryption.",
-      },
-    ],
-    techStack: ["Flutter", "React Native", "Swift", "Kotlin", "Firebase", "AWS Amplify", "GraphQL", "REST APIs"],
-    process: [
-      { step: "Discovery", description: "Defining app features and user journeys" },
-      { step: "Design", description: "UI/UX design with interactive prototypes" },
-      { step: "Development", description: "Agile development with regular demos" },
-      { step: "QA Testing", description: "Device testing and beta programs" },
-      { step: "Launch", description: "App store submission and marketing" },
-    ],
-  },
-  "machine-learning": {
-    title: "Machine Learning",
-    tagline: "Intelligent Solutions for Complex Problems",
-    heroImage: "/services/ml-hero.jpg",
-    introduction: [
-      "Machine learning is revolutionizing how businesses operate, from automating routine tasks to uncovering hidden patterns in data. Our ML engineers build custom models that deliver measurable ROI and competitive advantages.",
-      "We specialize in predictive analytics, natural language processing, computer vision, and recommendation systems. Our solutions are designed to integrate seamlessly with your existing systems and scale as your data grows.",
-    ],
-    expertise: [
-      {
-        icon: Brain,
-        title: "Predictive Analytics",
-        description: "Forecast trends, demand, and customer behavior accurately.",
-      },
-      {
-        icon: FileText,
-        title: "NLP Solutions",
-        description: "Text analysis, chatbots, and sentiment analysis.",
-      },
-      {
-        icon: Layers,
-        title: "Computer Vision",
-        description: "Image recognition, object detection, and video analysis.",
-      },
-      {
-        icon: BarChart3,
-        title: "Recommendation Engines",
-        description: "Personalized content and product recommendations.",
-      },
-    ],
-    techStack: ["Python", "TensorFlow", "PyTorch", "Scikit-learn", "AWS SageMaker", "MLflow", "Kubernetes", "Docker"],
-    process: [
-      { step: "Discovery", description: "Identifying ML opportunities and data audit" },
-      { step: "Data Prep", description: "Cleaning, labeling, and feature engineering" },
-      { step: "Model Dev", description: "Training, tuning, and validation" },
-      { step: "Integration", description: "API development and system integration" },
-      { step: "Monitoring", description: "Model performance tracking and retraining" },
-    ],
-  },
-  "business-intelligence": {
-    title: "Business Intelligence",
-    tagline: "Data-Driven Decision Making",
-    heroImage: "/services/bi-hero.jpg",
-    introduction: [
-      "Transform your raw data into actionable insights with our comprehensive business intelligence solutions. We help organizations make smarter decisions faster by visualizing complex data in intuitive dashboards.",
-      "Our BI experts work with leading platforms like Power BI, Tableau, and Looker to create custom reporting solutions that provide real-time visibility into your key performance indicators.",
-    ],
-    expertise: [
-      {
-        icon: BarChart3,
-        title: "Custom Dashboards",
-        description: "Interactive visualizations tailored to your KPIs.",
-      },
-      {
-        icon: Database,
-        title: "Data Warehousing",
-        description: "Centralized data repositories for unified reporting.",
-      },
-      {
-        icon: Zap,
-        title: "Real-time Analytics",
-        description: "Live data feeds and automated alerts.",
-      },
-      {
-        icon: FileText,
-        title: "Automated Reports",
-        description: "Scheduled reports delivered to stakeholders.",
-      },
-    ],
-    techStack: ["Power BI", "Tableau", "Looker", "Snowflake", "BigQuery", "dbt", "Airflow", "Python"],
-    process: [
-      { step: "Discovery", description: "Understanding reporting needs and data sources" },
-      { step: "Data Model", description: "Designing dimensional models and ETL" },
-      { step: "Development", description: "Building dashboards and reports" },
-      { step: "Training", description: "User training and documentation" },
-      { step: "Support", description: "Ongoing maintenance and enhancements" },
-    ],
-  },
-  "clinical-data-analytics": {
-    title: "Clinical Data Analytics",
-    tagline: "Healthcare Intelligence, HIPAA Compliant",
-    heroImage: "/services/clinical-hero.jpg",
-    introduction: [
-      "Healthcare organizations generate massive amounts of data that, when properly analyzed, can improve patient outcomes and operational efficiency. Our clinical data analytics services help you unlock the value in your healthcare data.",
-      "We specialize in HIPAA-compliant solutions for hospitals, clinics, and health tech companies. From EHR data integration to predictive health models, we deliver insights that make a real difference in patient care.",
-    ],
-    expertise: [
-      {
-        icon: Stethoscope,
-        title: "EHR Integration",
-        description: "Connect and analyze data from multiple EHR systems.",
-      },
-      {
-        icon: Brain,
-        title: "Predictive Health",
-        description: "Risk stratification and readmission prediction.",
-      },
-      {
-        icon: Shield,
-        title: "HIPAA Compliance",
-        description: "Secure, compliant data handling and storage.",
-      },
-      {
-        icon: BarChart3,
-        title: "Population Health",
-        description: "Community health trends and outcomes analysis.",
-      },
-    ],
-    techStack: ["HL7 FHIR", "Epic", "Cerner", "AWS HealthLake", "Python", "R", "SAS", "Snowflake"],
-    process: [
-      { step: "Assessment", description: "Data audit and compliance review" },
-      { step: "Architecture", description: "Secure infrastructure design" },
-      { step: "Development", description: "Building analytics pipelines" },
-      { step: "Validation", description: "Clinical validation and testing" },
-      { step: "Deployment", description: "Go-live with training and support" },
-    ],
-  },
-  "custom-software": {
-    title: "Custom Software",
-    tagline: "Tailored Solutions for Unique Challenges",
-    heroImage: "/services/custom-hero.jpg",
-    introduction: [
-      "Off-the-shelf software often falls short when it comes to addressing your unique business processes and requirements. Our custom software development services deliver solutions that fit your workflow perfectly.",
-      "We partner with you to understand your challenges deeply, then design and build software that automates processes, improves efficiency, and gives you a competitive edge in your market.",
-    ],
-    expertise: [
-      {
-        icon: Code,
-        title: "Enterprise Apps",
-        description: "Scalable applications for large organizations.",
-      },
-      {
-        icon: Layers,
-        title: "System Integration",
-        description: "Connect disparate systems into unified workflows.",
-      },
-      {
-        icon: Zap,
-        title: "Process Automation",
-        description: "Automate repetitive tasks and workflows.",
-      },
-      {
-        icon: Shield,
-        title: "Enterprise Security",
-        description: "Role-based access, audit trails, and encryption.",
-      },
-    ],
-    techStack: ["Java", "C#", ".NET", "Python", "Microservices", "Docker", "Kubernetes", "Azure"],
-    process: [
-      { step: "Discovery", description: "Deep dive into your business processes" },
-      { step: "Architecture", description: "System design and technology selection" },
-      { step: "Development", description: "Agile sprints with continuous feedback" },
-      { step: "Testing", description: "Comprehensive QA and UAT" },
-      { step: "Deployment", description: "Phased rollout with training" },
-    ],
-  },
-  "data-engineering": {
-    title: "Data Engineering",
-    tagline: "Building Robust Data Infrastructure",
-    heroImage: "/services/data-eng-hero.jpg",
-    introduction: [
-      "Great data analytics starts with great data infrastructure. Our data engineering services help you build scalable, reliable pipelines that move data from source to insight efficiently.",
-      "We design and implement modern data architectures using cloud-native technologies, ensuring your data is always available, accurate, and ready for analysis.",
-    ],
-    expertise: [
-      {
-        icon: Database,
-        title: "Data Pipelines",
-        description: "Automated ETL/ELT workflows for real-time data.",
-      },
-      {
-        icon: Layers,
-        title: "Data Warehousing",
-        description: "Modern cloud data warehouses optimized for analytics.",
-      },
-      {
-        icon: Zap,
-        title: "Stream Processing",
-        description: "Real-time data processing with Kafka and Spark.",
-      },
-      {
-        icon: Shield,
-        title: "Data Governance",
-        description: "Data quality, lineage, and access controls.",
-      },
-    ],
-    techStack: ["Apache Spark", "Kafka", "Airflow", "dbt", "Snowflake", "Databricks", "AWS Glue", "BigQuery"],
-    process: [
-      { step: "Assessment", description: "Current state analysis and requirements" },
-      { step: "Architecture", description: "Data platform design" },
-      { step: "Build", description: "Pipeline development and testing" },
-      { step: "Migration", description: "Data migration and validation" },
-      { step: "Operations", description: "Monitoring and optimization" },
-    ],
-  },
-  "legacy-modernization": {
-    title: "Legacy Modernization",
-    tagline: "Transform Without Disruption",
-    heroImage: "/services/legacy-hero.jpg",
-    introduction: [
-      "Outdated systems can hold your business back, creating security risks and limiting your ability to innovate. Our legacy modernization services help you upgrade to modern architectures without disrupting operations.",
-      "We take a phased approach to modernization, allowing you to realize benefits incrementally while minimizing risk. Whether it is cloud migration, microservices transformation, or complete rewrites, we have the expertise to guide you.",
-    ],
-    expertise: [
-      {
-        icon: Cpu,
-        title: "Cloud Migration",
-        description: "Move legacy systems to AWS, Azure, or GCP.",
-      },
-      {
-        icon: Layers,
-        title: "Microservices",
-        description: "Break monoliths into scalable microservices.",
-      },
-      {
-        icon: Code,
-        title: "Code Refactoring",
-        description: "Modernize codebases without full rewrites.",
-      },
-      {
-        icon: Shield,
-        title: "Security Updates",
-        description: "Patch vulnerabilities and update dependencies.",
-      },
-    ],
-    techStack: ["Kubernetes", "Docker", "AWS", "Azure", "Terraform", "CI/CD", "Microservices", "API Gateway"],
-    process: [
-      { step: "Assessment", description: "Legacy system analysis and risk evaluation" },
-      { step: "Strategy", description: "Modernization roadmap development" },
-      { step: "Pilot", description: "Proof of concept with low-risk components" },
-      { step: "Migration", description: "Phased modernization execution" },
-      { step: "Optimization", description: "Performance tuning and cost optimization" },
-    ],
-  },
-  "seo-optimization": {
-    title: "SEO Optimization",
-    tagline: "Dominate Search Rankings",
-    heroImage: "/services/seo-hero.jpg",
-    introduction: [
-      "Visibility in search results can make or break your online business. Our SEO optimization services use data-driven strategies to improve your rankings and drive qualified organic traffic to your website.",
-      "We go beyond basic keyword optimization to deliver comprehensive SEO that includes technical audits, content strategy, link building, and ongoing performance monitoring.",
-    ],
-    expertise: [
-      {
-        icon: Search,
-        title: "Technical SEO",
-        description: "Site speed, crawlability, and structured data.",
-      },
-      {
-        icon: FileText,
-        title: "Content Strategy",
-        description: "Keyword research and content optimization.",
-      },
-      {
-        icon: Globe,
-        title: "Link Building",
-        description: "Quality backlink acquisition strategies.",
-      },
-      {
-        icon: BarChart3,
-        title: "Analytics & Reporting",
-        description: "Detailed ranking and traffic reports.",
-      },
-    ],
-    techStack: ["Google Analytics", "Search Console", "Ahrefs", "SEMrush", "Screaming Frog", "Schema.org", "Core Web Vitals"],
-    process: [
-      { step: "Audit", description: "Comprehensive SEO audit and competitor analysis" },
-      { step: "Strategy", description: "Custom SEO roadmap development" },
-      { step: "On-Page", description: "Content and technical optimizations" },
-      { step: "Off-Page", description: "Link building and outreach" },
-      { step: "Monitor", description: "Ranking tracking and adjustments" },
-    ],
-  },
-  "ui-ux-design": {
-    title: "UI/UX Design",
-    tagline: "Designs That Delight Users",
-    heroImage: "/services/uiux-hero.jpg",
-    introduction: [
-      "Great design is not just about aesthetics—it is about creating experiences that users love and that drive business results. Our UI/UX design services blend creativity with user research to deliver interfaces that convert.",
-      "From user research and wireframing to high-fidelity prototypes and design systems, we provide end-to-end design services that ensure your digital products are intuitive, accessible, and beautiful.",
-    ],
-    expertise: [
-      {
-        icon: Search,
-        title: "User Research",
-        description: "Interviews, surveys, and usability testing.",
-      },
-      {
-        icon: Palette,
-        title: "Visual Design",
-        description: "Stunning interfaces that reflect your brand.",
-      },
-      {
-        icon: Layers,
-        title: "Prototyping",
-        description: "Interactive prototypes for validation.",
-      },
-      {
-        icon: Code,
-        title: "Design Systems",
-        description: "Scalable component libraries and guidelines.",
-      },
-    ],
-    techStack: ["Figma", "Adobe XD", "Sketch", "InVision", "Principle", "Framer", "Storybook", "Zeplin"],
-    process: [
-      { step: "Research", description: "User interviews and competitive analysis" },
-      { step: "Wireframes", description: "Low-fidelity layouts and flows" },
-      { step: "Design", description: "High-fidelity mockups and prototypes" },
-      { step: "Testing", description: "Usability testing and iteration" },
-      { step: "Handoff", description: "Developer handoff with specs" },
-    ],
-  },
-  "social-media-marketing": {
-    title: "Social Media Marketing",
-    tagline: "Engage, Grow, Convert",
-    heroImage: "/services/smm-hero.jpg",
-    introduction: [
-      "Social media is where your customers spend their time. Our social media marketing services help you build a strong presence, engage your audience, and turn followers into customers.",
-      "We create data-driven social strategies that include content creation, community management, paid advertising, and influencer partnerships. Our goal is to build authentic connections that drive measurable business results.",
-    ],
-    expertise: [
-      {
-        icon: Palette,
-        title: "Content Creation",
-        description: "Engaging posts, stories, and video content.",
-      },
-      {
-        icon: LineChart,
-        title: "Paid Advertising",
-        description: "Targeted campaigns on all major platforms.",
-      },
-      {
-        icon: Globe,
-        title: "Community Management",
-        description: "Active engagement and reputation management.",
-      },
-      {
-        icon: BarChart3,
-        title: "Analytics",
-        description: "Performance tracking and optimization.",
-      },
-    ],
-    techStack: ["Meta Business Suite", "Hootsuite", "Sprout Social", "Canva", "Later", "Google Ads", "TikTok Ads"],
-    process: [
-      { step: "Audit", description: "Social presence and competitor analysis" },
-      { step: "Strategy", description: "Platform selection and content calendar" },
-      { step: "Creation", description: "Content production and scheduling" },
-      { step: "Engagement", description: "Community management and interaction" },
-      { step: "Optimize", description: "Performance analysis and refinement" },
-    ],
-  },
-  "content-strategy": {
-    title: "Content Strategy",
-    tagline: "Content That Converts",
-    heroImage: "/services/content-hero.jpg",
-    introduction: [
-      "Content is the foundation of modern marketing. Our content strategy services help you create and distribute valuable content that attracts, engages, and converts your target audience.",
-      "We develop comprehensive content strategies that align with your business goals, from thought leadership blogs to video marketing and email campaigns. Every piece of content is designed to move prospects through your funnel.",
-    ],
-    expertise: [
-      {
-        icon: FileText,
-        title: "Content Planning",
-        description: "Editorial calendars and topic clusters.",
-      },
-      {
-        icon: Palette,
-        title: "Content Creation",
-        description: "Blogs, videos, infographics, and more.",
-      },
-      {
-        icon: Search,
-        title: "SEO Integration",
-        description: "Content optimized for search visibility.",
-      },
-      {
-        icon: BarChart3,
-        title: "Performance Analysis",
-        description: "Content ROI tracking and optimization.",
-      },
-    ],
-    techStack: ["WordPress", "HubSpot", "Contentful", "Ahrefs", "Grammarly", "Jasper AI", "Canva", "Loom"],
-    process: [
-      { step: "Audit", description: "Content inventory and gap analysis" },
-      { step: "Strategy", description: "Audience personas and content pillars" },
-      { step: "Creation", description: "Content production and optimization" },
-      { step: "Distribution", description: "Multi-channel publishing" },
-      { step: "Measure", description: "Analytics and continuous improvement" },
-    ],
-  },
-};
-
-// Default service data for unknown slugs
-const defaultService: ServiceData = {
-  title: "Our Service",
-  tagline: "Excellence in Every Solution",
-  heroImage: "/services/default-hero.jpg",
-  introduction: [
-    "At V-Productions & Marketing, we deliver exceptional solutions tailored to your unique business needs. Our team of experts combines industry knowledge with cutting-edge technology to drive results.",
-    "We work closely with our clients to understand their challenges and develop strategies that create real, measurable value for their organizations.",
-  ],
-  expertise: [
-    {
-      icon: Zap,
-      title: "Fast Delivery",
-      description: "Quick turnaround without compromising quality.",
-    },
-    {
-      icon: Shield,
-      title: "Quality Assured",
-      description: "Rigorous testing and quality control processes.",
-    },
-    {
-      icon: Code,
-      title: "Modern Technology",
-      description: "Built with the latest tools and frameworks.",
-    },
-    {
-      icon: Layers,
-      title: "Scalable Solutions",
-      description: "Architecture designed to grow with your business.",
-    },
-  ],
-  techStack: ["React", "Node.js", "Python", "AWS", "Docker", "PostgreSQL", "MongoDB", "GraphQL"],
-  process: [
-    { step: "Discovery", description: "Understanding your requirements" },
-    { step: "Planning", description: "Detailed project roadmap" },
-    { step: "Execution", description: "Agile development process" },
-    { step: "Testing", description: "Comprehensive quality assurance" },
-    { step: "Delivery", description: "Deployment and support" },
-  ],
-};
-
+// --- INTERFACE ---
 interface ServiceData {
   title: string;
   tagline: string;
-  heroImage: string;
+  visualImage: string;
   introduction: string[];
   expertise: {
-    icon: React.ComponentType<{ className?: string }>;
+    icon: any;
     title: string;
     description: string;
   }[];
@@ -558,125 +62,431 @@ interface ServiceData {
   }[];
 }
 
-export default function ServiceDetailPage({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}) {
-  const resolvedParams = use(params);
-  const service = servicesData[resolvedParams.slug] || defaultService;
+// --- ALL SERVICES DATA (MUKAMMAL 13 CATEGORIES) ---
+const servicesData: Record<string, ServiceData> = {
+  "web-development": {
+    title: "Web Development",
+    tagline: "Building Digital Experiences That Convert",
+    visualImage: "/services/web-detail.jpg",
+    introduction: [
+      "Your website is the digital face of your business. We build high-performance, responsive websites that combine aesthetic appeal with functional excellence.",
+      "Using Next.js, React, and modern CSS frameworks, we ensure your site is lightning fast, secure, and SEO optimized from day one.",
+      "Our approach focuses on user-centric design, ensuring that every visitor has a seamless experience regardless of the device they use."
+    ],
+    expertise: [
+      { icon: Code, title: "Custom Web Apps", description: "Tailored web applications built for your specific business logic and workflows." },
+      { icon: Zap, title: "Performance First", description: "Ultra-fast loading speeds for better user retention and search engine rankings." },
+      { icon: Globe, title: "E-commerce", description: "Scalable online stores with seamless payment integrations and inventory systems." },
+      { icon: Shield, title: "Secure Architecture", description: "Enterprise-grade security standards to protect your users and data assets." },
+    ],
+    techStack: ["Next.js", "React", "Node.js", "TypeScript", "Tailwind CSS", "PostgreSQL", "MongoDB", "Vercel"],
+    process: [
+      { step: "Planning", description: "Requirement gathering, competitor analysis, and sitemap design." },
+      { step: "UI/UX Design", description: "Creating visual prototypes and user interaction flows." },
+      { step: "Development", description: "Agile coding with regular updates and feedback cycles." },
+      { step: "QA Testing", description: "Cross-browser and device testing for 100% bug-free delivery." },
+      { step: "Deployment", description: "Launching on global edge servers with continuous monitoring." },
+    ],
+  },
+
+  "mobile-apps": {
+    title: "Mobile Apps",
+    tagline: "Native & Cross-Platform Excellence",
+    visualImage: "/services/mobile-detail.jpg",
+    introduction: [
+      "In a mobile-first world, we create intuitive apps that provide a seamless user experience across iOS and Android.",
+      "Whether it is a native app or a hybrid cross-platform solution, we leverage technologies that ensure high performance.",
+      "We focus on creating apps that not only look stunning but are also light on system resources and easy to navigate."
+    ],
+    expertise: [
+      { icon: Smartphone, title: "Native Development", description: "Deeply integrated apps using Swift for iOS and Kotlin for Android." },
+      { icon: Palette, title: "Mobile UI/UX", description: "Modern, thumb-friendly interfaces designed specifically for mobile screens." },
+      { icon: Zap, title: "Fast Interaction", description: "Optimization for low latency, smooth animations, and high responsiveness." },
+      { icon: Shield, title: "Data Security", description: "Biometric authentication and secure local data encryption for app safety." },
+    ],
+    techStack: ["Flutter", "React Native", "Swift", "Kotlin", "Firebase", "SQLite", "GraphQL"],
+    process: [
+      { step: "Ideation", description: "Defining the core features and user personas for the app." },
+      { step: "Prototyping", description: "Building interactive wireframes to test the app logic." },
+      { step: "App Coding", description: "Modular development focusing on security and speed." },
+      { step: "Testing", description: "Beta testing on various physical mobile devices." },
+      { step: "Submission", description: "Handling App Store and Play Store guidelines for launch." },
+    ],
+  },
+
+  "machine-learning": {
+    title: "Machine Learning",
+    tagline: "Intelligent AI Solutions for Complex Problems",
+    visualImage: "/services/ml-detail.jpg",
+    introduction: [
+      "Unlock the hidden potential of your business data. Our ML engineers build custom models that automate decisions.",
+      "We specialize in predictive analytics, natural language processing (NLP), and computer vision for modern startups.",
+      "Our models are designed to learn from every interaction, becoming more efficient and accurate over time."
+    ],
+    expertise: [
+      { icon: Brain, title: "Predictive AI", description: "Advanced models that forecast future sales, trends, and customer behavior." },
+      { icon: Search, title: "NLP Solutions", description: "Intelligent chatbots, sentiment analysis, and automated document reading." },
+      { icon: Cpu, title: "Deep Learning", description: "Neural networks for complex pattern recognition." },
+      { icon: BarChart3, title: "Data Insights", description: "Transforming raw numbers into visual stories for strategic decisions." },
+    ],
+    techStack: ["Python", "TensorFlow", "PyTorch", "Scikit-Learn", "Pandas", "AWS SageMaker", "MLflow"],
+    process: [
+      { step: "Data Audit", description: "Evaluating existing data quality and sources." },
+      { step: "Data Prep", description: "Cleaning, labeling, and feature engineering for accuracy." },
+      { step: "Model Train", description: "Running algorithms to find the best fit for your problem." },
+      { step: "Validation", description: "Testing models against real-world scenarios." },
+      { step: "Integration", description: "Deploying AI models into your live software environment." },
+    ],
+  },
+
+  "backend-development": {
+    title: "Backend Development",
+    tagline: "Robust Engines for Digital Power",
+    visualImage: "/services/backend-detail.jpg",
+    introduction: [
+      "The strength of any application lies in its backend. We build secure and scalable architectures for heavy apps.",
+      "From complex database optimization to real-time API logic, we ensure stability and data integrity.",
+      "Our backends are designed to handle millions of requests without compromising on speed or security."
+    ],
+    expertise: [
+      { icon: Server, title: "API Architecture", description: "Designing high-performance RESTful and GraphQL API ecosystems." },
+      { icon: Database, title: "Database Design", description: "Optimized SQL and NoSQL schemas for massive data throughput." },
+      { icon: Terminal, title: "Microservices", description: "Breaking down complex apps into manageable, scalable cloud services." },
+      { icon: Shield, title: "Access Control", description: "JWT, OAuth, and multi-factor authentication for data protection." },
+    ],
+    techStack: ["Node.js", "Python", "Go-Lang", "Docker", "Kubernetes", "Redis", "PostgreSQL", "AWS"],
+    process: [
+      { step: "Arch Planning", description: "Mapping out the server and database infrastructure." },
+      { step: "Logic Build", description: "Writing the core business rules and data handlers." },
+      { step: "API Design", description: "Building the bridges between frontend and database." },
+      { step: "Perf Tuning", description: "Identifying and removing server bottlenecks." },
+      { step: "Scaling", description: "Auto-scaling configuration for traffic spikes." },
+    ],
+  },
+
+  "business-intelligence": {
+    title: "Business Intelligence",
+    tagline: "Data-Driven Decision Making",
+    visualImage: "/services/bi-detail.jpg",
+    introduction: [
+      "Stop guessing and start knowing. Our BI solutions help you visualize raw data into actionable dashboards.",
+      "We help organizations identify trends, spot inefficiencies, and uncover new growth opportunities.",
+      "Our dashboards provide real-time visibility into your business KPIs from anywhere in the world."
+    ],
+    expertise: [
+      { icon: BarChart3, title: "Custom Dashboards", description: "Interactive, real-time data visualizations tailored to your needs." },
+      { icon: Database, title: "Data Warehousing", description: "Centralizing disparate data sources into a single source of truth." },
+      { icon: Zap, title: "ETL Pipelines", description: "Automated cleaning and moving of data from source to storage." },
+      { icon: FileText, title: "Reporting", description: "Automated monthly and weekly reports delivered to your inbox." },
+    ],
+    techStack: ["Power BI", "Tableau", "Snowflake", "BigQuery", "SQL", "Looker", "Python"],
+    process: [
+      { step: "Discovery", description: "Defining which metrics matter most for your business." },
+      { step: "ETL Build", description: "Connecting and automating data extraction." },
+      { step: "Visualization", description: "Creating intuitive and beautiful dashboards." },
+      { step: "User Training", description: "Teaching your team how to read and use data." },
+      { step: "Support", description: "Refining dashboards as your business grows." },
+    ],
+  },
+
+  "clinical-data-analytics": {
+    title: "Clinical Data Analytics",
+    tagline: "HIPAA Compliant Healthcare Insights",
+    visualImage: "/services/clinical-detail.jpg",
+    introduction: [
+      "Improve patient outcomes with specialized healthcare data analysis. We provide secure insights for medical teams.",
+      "From hospital readmission rates to clinical trial efficacy, our analytics help professionals deliver better care.",
+      "We strictly adhere to HIPAA and GDPR standards to ensure patient privacy is always protected."
+    ],
+    expertise: [
+      { icon: Stethoscope, title: "Patient Outcomes", description: "Deep analysis of medical records to identify improvement areas." },
+      { icon: Brain, title: "Predictive Health", description: "Risk stratification models to identify high-risk patients early." },
+      { icon: ShieldCheck, title: "Compliance Tech", description: "Securing clinical data with high-level encryption and audits." },
+      { icon: Activity, title: "EHR Integration", description: "Optimizing and analyzing Electronic Health Record systems." },
+    ],
+    techStack: ["HL7 FHIR", "AWS HealthLake", "Python", "SQL", "Tableau", "R-Studio"],
+    process: [
+      { step: "Data Audit", description: "Checking for data accuracy and privacy compliance." },
+      { step: "Modeling", description: "Developing algorithms for clinical health metrics." },
+      { step: "Validation", description: "Testing results against established medical benchmarks." },
+      { step: "Deployment", description: "Integrating analytics into hospital workflows." },
+      { step: "Monitoring", description: "Ensuring 24/7 reliability of healthcare data." },
+    ],
+  },
+
+  "data-engineering": {
+    title: "Data Engineering",
+    tagline: "Building Robust Data Infrastructures",
+    visualImage: "/services/data-detail.jpg",
+    introduction: [
+      "Great analytics start with great data engineering. We build the pipelines that collect, clean, and store your data.",
+      "We design infrastructures that handle petabytes of information with high availability and security.",
+      "Our engineering team ensures that your AI and BI teams always have fresh, clean data ready."
+    ],
+    expertise: [
+      { icon: Workflow, title: "ETL Development", description: "Automated workflows to extract and transform complex datasets." },
+      { icon: CloudCog, title: "Data Lakes", description: "Scalable storage for massive amounts of structured and raw data." },
+      { icon: Zap, title: "Stream Processing", description: "Real-time data ingestion using Kafka, Spark, and Flink." },
+      { icon: Shield, title: "Data Governance", description: "Ensuring data lineage, quality control, and access rights." },
+    ],
+    techStack: ["Apache Spark", "Kafka", "Airflow", "dbt", "Snowflake", "Terraform", "Python"],
+    process: [
+      { step: "Source Map", description: "Identifying every data origin in your ecosystem." },
+      { step: "Architecture", description: "Designing the cloud data platform." },
+      { step: "Pipeline", description: "Building the code that moves and cleans data." },
+      { step: "Automation", description: "Setting up monitors and self-healing scripts." },
+      { step: "Optimizing", description: "Reducing cloud costs and increasing pipeline speed." },
+    ],
+  },
+
+  "custom-software": {
+    title: "Custom Software",
+    tagline: "Tailored Solutions for Unique Challenges",
+    visualImage: "/services/custom-detail.jpg",
+    introduction: [
+      "One size does not fit all. We build bespoke software that maps perfectly to your unique business processes.",
+      "Whether you need an internal ERP or a customer-facing portal, we build with your specific goals in mind.",
+      "Our software is designed to be scalable, allowing you to add features as your company expands."
+    ],
+    expertise: [
+      { icon: Monitor, title: "Enterprise ERP", description: "Comprehensive systems to manage HR, Finance, and Inventory." },
+      { icon: Component, title: "Internal Tools", description: "Dashboards and automation scripts for team productivity." },
+      { icon: AppWindow, title: "B2B Portals", description: "Secure platforms for client communication and file sharing." },
+      { icon: Code, title: "API Development", description: "Building the custom connectors that link all your systems." },
+    ],
+    techStack: ["Java", "C#", ".NET", "Node.js", "Angular", "React", "SQL Server"],
+    process: [
+      { step: "Requirement", description: "Detailed analysis of your manual business tasks." },
+      { step: "Blueprint", description: "Designing the software architecture and logic flow." },
+      { step: "Agile Dev", description: "Coding in two-week sprints with constant demo sessions." },
+      { step: "Testing", description: "Rigorous UAT to ensure it fits your team's needs." },
+      { step: "Deployment", description: "Installation, training, and ongoing technical support." },
+    ],
+  },
+
+  "legacy-modernization": {
+    title: "Legacy Modernization",
+    tagline: "Upgrade Your Tech Without the Risk",
+    visualImage: "/services/legacy-detail.jpg",
+    introduction: [
+      "Old systems hold you back. We help you migrate legacy apps to modern, cloud-native architectures.",
+      "We minimize business disruption while upgrading your core tech stack for better security and speed.",
+      "Modernization allows you to utilize new features like AI, cloud-scaling, and modern APIs."
+    ],
+    expertise: [
+      { icon: CloudCog, title: "Cloud Migration", description: "Safely moving on-premise servers to AWS, Azure, or GCP." },
+      { icon: Laptop, title: "Refactoring", description: "Cleaning old codebases to improve maintenance and speed." },
+      { icon: Server, title: "Re-platforming", description: "Moving apps to modern frameworks while keeping data intact." },
+      { icon: Shield, title: "Security Patching", description: "Updating outdated libraries to prevent modern cyber threats." },
+    ],
+    techStack: ["Docker", "Kubernetes", "AWS", "Azure", "Terraform", "CI/CD Pipelines"],
+    process: [
+      { step: "Audit", description: "Scanning old code for risks and dependencies." },
+      { step: "Roadmap", description: "Step-by-step plan to modernize without downtime." },
+      { step: "Migration", description: "Phased moving of data and logic to new tech." },
+      { step: "Validation", description: "Ensuring the new system works exactly like the old one." },
+      { step: "Optimization", description: "Improving the new environment for cost and speed." },
+    ],
+  },
+
+  "seo-optimization": {
+    title: "SEO Optimization",
+    tagline: "Dominate Search Engine Rankings",
+    visualImage: "/services/seo-detail.jpg",
+    introduction: [
+      "If they can't find you, they can't buy from you. We help your business reach the top of search results.",
+      "Our SEO approach is purely white-hat, focusing on technical health, content, and authority.",
+      "We track everything from keyword positions to user behavior to maximize your organic ROI."
+    ],
+    expertise: [
+      { icon: Search, title: "Technical SEO", description: "Optimizing site speed, mobile-friendliness, and indexing." },
+      { icon: TrendingUp, title: "Keyword Strategy", description: "Targeting the high-converting terms that your buyers search." },
+      { icon: Globe2, title: "On-Page SEO", description: "Structuring content and meta-tags for search engine clarity." },
+      { icon: LineChart, title: "Backlink Building", description: "Earning authority through high-quality external citations." },
+    ],
+    techStack: ["Ahrefs", "SEMrush", "Google Search Console", "Screaming Frog", "PageSpeed Insights"],
+    process: [
+      { step: "SEO Audit", description: "Finding technical errors that prevent ranking." },
+      { step: "Keyword Map", description: "Assigning target terms to specific pages." },
+      { step: "Content Fix", description: "Updating site copy to be search friendly." },
+      { step: "Off-Page", description: "Building high-quality link profiles." },
+      { step: "Review", description: "Monthly ranking and traffic reporting." },
+    ],
+  },
+
+  "ui-ux-design": {
+    title: "UI/UX Design",
+    tagline: "Designs That Delight and Convert",
+    visualImage: "/services/uiux-detail.jpg",
+    introduction: [
+      "Visuals catch eyes, but experience wins hearts. We create digital products that are easy and fun to use.",
+      "Our design process starts with understanding your users' psychological triggers and needs.",
+      "We build design systems that grow with your product, ensuring consistency across all screens."
+    ],
+    expertise: [
+      { icon: PenTool, title: "Visual Design", description: "Stunning, brand-aligned interfaces that leave a lasting impression." },
+      { icon: Search, title: "UX Research", description: "Real-world user testing and heatmaps to find pain points." },
+      { icon: Layers, title: "Prototyping", description: "Interactive app models to test logic before dev begins." },
+      { icon: Code, title: "Design Handoff", description: "Detailed specs and assets for seamless development." },
+    ],
+    techStack: ["Figma", "Adobe XD", "Sketch", "Framer", "Principle", "Zeplin"],
+    process: [
+      { step: "User Discovery", description: "Interviewing users to find their frustrations." },
+      { step: "Wireframes", description: "Creating the basic structural layout." },
+      { step: "High-Fi Design", description: "Adding colors, images, and brand soul." },
+      { step: "Prototypes", description: "Linking screens to simulate the real app." },
+      { step: "Dev Sync", description: "Reviewing design with engineers for feasibility." },
+    ],
+  },
+
+  "social-media-marketing": {
+    title: "Social Media Marketing",
+    tagline: "Building Brands in the Social Era",
+    visualImage: "/services/social-detail.jpg",
+    introduction: [
+      "Social media is the heartbeat of modern marketing. We help you connect directly with your buyers.",
+      "From viral content to highly targeted ad campaigns, we manage your entire social presence.",
+      "We focus on creating communities around your brand, not just pushing one-way sales."
+    ],
+    expertise: [
+      { icon: Share2, title: "Paid Social", description: "ROI-driven ad campaigns on Meta, LinkedIn, and TikTok." },
+      { icon: Palette, title: "Creative Content", description: "High-quality reels, graphics, and stories for engagement." },
+      { icon: Users, title: "Community Lead", description: "Responding to comments and managing customer feedback." },
+      { icon: TrendingUp, title: "Growth Logic", description: "Organic strategies to increase followers and brand reach." },
+    ],
+    techStack: ["Meta Business", "Ads Manager", "Canva", "CapCut", "Later", "Hootsuite"],
+    process: [
+      { step: "Brand Audit", description: "Reviewing your current social media standing." },
+      { step: "Strategy", description: "Setting platform goals and content pillars." },
+      { step: "Production", description: "Creating and scheduling monthly content." },
+      { step: "Ad Setup", description: "Developing target audiences and ad creative." },
+      { step: "Analytics", description: "Analyzing data to increase campaign performance." },
+    ],
+  },
+
+  "content-strategy": {
+    title: "Content Strategy",
+    tagline: "Words That Tell Stories and Sell Products",
+    visualImage: "/services/content-detail.jpg",
+    introduction: [
+      "Content is the engine of your marketing funnel. We create strategies that convert readers into fans.",
+      "From technical whitepapers to persuasive sales copy, we handle all aspects of content production.",
+      "Our strategies align your content with user search intent and business milestones."
+    ],
+    expertise: [
+      { icon: FileText, title: "Blog Strategy", description: "Regular, high-value articles that build authority and SEO." },
+      { icon: Target, title: "Copywriting", description: "Sales-focused copy for landing pages and email marketing." },
+      { icon: Share2, title: "Distribution", description: "Getting your content published on high-traffic industry sites." },
+      { icon: BarChart3, title: "Content ROI", description: "Measuring how much revenue each piece of content generates." },
+    ],
+    techStack: ["WordPress", "HubSpot", "Ahrefs", "Grammarly", "ChatGPT Plus", "Google Docs"],
+    process: [
+      { step: "Personas", description: "Identifying exactly who we are writing for." },
+      { step: "Keyword Map", description: "Finding search terms that drive buyers." },
+      { step: "Drafting", description: "Writing unique, high-quality content." },
+      { step: "Optimization", description: "Adding SEO elements to every piece." },
+      { step: "Promotion", description: "Sharing content across social and email." },
+    ],
+  },
+};
+
+// --- FALLBACK ---
+const defaultService: ServiceData = {
+  title: "Service Category",
+  tagline: "Excellence in Digital Solutions",
+  visualImage: "/services/default-detail.jpg",
+  introduction: ["Innovation drives everything we do. We provide specialized technology services to help you scale."],
+  expertise: [
+    { icon: Zap, title: "Efficiency", description: "Optimized workflows for fast results." },
+    { icon: Shield, title: "Security", description: "Protecting your digital assets." }
+  ],
+  techStack: ["React", "Python", "Cloud Tech"],
+  process: [
+    { step: "Planning", description: "Setting project milestones." },
+    { step: "Execution", description: "Building with quality." }
+  ],
+};
+
+// --- MAIN COMPONENT ---
+export default function ServiceDetailPage({ params }: { params: { slug: string } }) {
+  const service = servicesData[params.slug] || defaultService;
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     setIsVisible(true);
-  }, []);
+    window.scrollTo(0, 0); 
+  }, [params.slug]);
 
   const processIcons = [Search, Palette, Code, TestTube, Rocket];
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-[#060610] overflow-x-hidden">
       <Header />
 
-      {/* Hero Section */}
-      <section className="relative min-h-[50vh] flex items-center overflow-hidden pt-32 pb-16">
-        {/* Background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-purple-deep via-background to-background" />
+      {/* 1. Dynamic Hero Section */}
+      <section className="relative min-h-[50vh] flex items-center pt-32 pb-16 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-[#1a0a2e] via-background to-background" />
         <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-10" />
+        <div className="absolute top-20 right-10 w-64 h-64 bg-gold/10 blur-[100px] rounded-full" />
         
-        {/* Animated gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-electric/10 via-transparent to-gold/10 animate-pulse" />
-
         <div className="container mx-auto px-4 relative z-10">
-          <div
-            className={`transition-all duration-1000 ${
-              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-            }`}
-          >
-            <Link
-              href="/services"
-              className="inline-flex items-center gap-2 text-muted-foreground hover:text-gold transition-colors mb-6"
-            >
-              <ArrowRight className="h-4 w-4 rotate-180" />
-              Back to Services
+          <div className={`transition-all duration-1000 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}>
+            <Link href="/services" className="inline-flex items-center gap-2 text-gray-500 hover:text-gold mb-8 transition-colors font-medium">
+              <ArrowRight className="h-4 w-4 rotate-180" /> Back to Services
             </Link>
-
-            <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-4">
+            <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-white mb-6 tracking-tighter uppercase italic break-words leading-tight">
               {service.title}
             </h1>
-            
-            <p className="text-xl md:text-2xl text-gold font-medium mb-6">
-              {service.tagline}
-            </p>
+            <p className="text-xl md:text-2xl text-gold font-bold italic tracking-wide drop-shadow-lg">{service.tagline}</p>
           </div>
         </div>
       </section>
 
-      {/* Introduction Section */}
-      <section className="py-16">
-        <div className="container mx-auto px-4">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6">
-              <h2 className="text-3xl font-bold text-foreground">
-                What We Offer
-              </h2>
-              {service.introduction.map((paragraph, index) => (
-                <p key={index} className="text-muted-foreground leading-relaxed text-lg">
-                  {paragraph}
-                </p>
-              ))}
-            </div>
-            
-            {/* Decorative visual */}
-            <div className="relative">
-              <div className="aspect-square rounded-3xl bg-gradient-to-br from-purple-deep via-blue-electric/20 to-gold/20 p-1">
-                <div className="w-full h-full rounded-3xl glass flex items-center justify-center">
-                  <div className="text-center">
-                    <div className="w-24 h-24 mx-auto rounded-2xl bg-gradient-to-br from-gold to-gold-light flex items-center justify-center mb-4">
-                      <Code className="h-12 w-12 text-accent-foreground" />
-                    </div>
-                    <p className="text-2xl font-bold text-foreground">{service.title}</p>
-                    <p className="text-muted-foreground">Expert Solutions</p>
-                  </div>
-                </div>
-              </div>
+      {/* 2. What We Offer (With Image) */}
+      <section className="py-24">
+        <div className="container mx-auto px-4 grid lg:grid-cols-2 gap-16 items-center">
+          <div className="space-y-8">
+            <h2 className="text-4xl font-bold text-white border-l-4 border-gold pl-6 uppercase tracking-tight">What We Offer</h2>
+            {service.introduction.map((text, i) => (
+              <p key={i} className="text-gray-400 text-lg leading-relaxed font-medium">{text}</p>
+            ))}
+          </div>
+          
+          <div className="relative group">
+            <div className="aspect-square rounded-[3.5rem] overflow-hidden border border-white/10 shadow-2xl relative">
+              <img 
+                src={service.visualImage} 
+                alt={service.title} 
+                className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105" 
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#060610] via-transparent opacity-70" />
               
-              {/* Floating elements */}
-              <div className="absolute -top-4 -right-4 w-20 h-20 rounded-full bg-gold/20 blur-xl" />
-              <div className="absolute -bottom-4 -left-4 w-32 h-32 rounded-full bg-blue-electric/20 blur-xl" />
+              <div className="absolute bottom-10 left-10 text-white">
+                <p className="text-3xl font-black italic uppercase tracking-tighter">{service.title}</p>
+                <p className="text-gold font-bold text-sm uppercase tracking-widest mt-1">Premium Solutions</p>
+              </div>
             </div>
+            
+            <div className="absolute -top-10 -right-10 w-56 h-56 bg-gold/10 blur-[120px] -z-10 rounded-full animate-pulse" />
+            <div className="absolute -bottom-10 -left-10 w-56 h-56 bg-blue-500/10 blur-[120px] -z-10 rounded-full animate-pulse" />
           </div>
         </div>
       </section>
 
-      {/* Core Expertise Grid */}
-      <section className="py-16 bg-purple-deep/20">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-foreground mb-4">
-              Core Expertise
-            </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              Our specialized capabilities in {service.title.toLowerCase()}
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-            {service.expertise.map((item, index) => (
-              <div
-                key={index}
-                className="group p-6 rounded-2xl glass border border-foreground/10 hover:border-gold/30 transition-all duration-300"
-              >
-                <div className="flex items-start gap-4">
-                  <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-gold to-gold-light flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
-                    <item.icon className="h-7 w-7 text-accent-foreground" />
+      {/* 3. Core Expertise Grid */}
+      <section className="py-24 bg-[#0d0d1a]/50 relative border-y border-white/5">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-3xl md:text-5xl font-bold text-white mb-16 tracking-tight">Core <span className="text-gold">Expertise</span></h2>
+          <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto text-left">
+            {service.expertise.map((item, i) => (
+              <div key={i} className="p-10 rounded-3xl bg-white/[0.02] border border-white/5 hover:border-gold/20 hover:bg-white/[0.04] transition-all group">
+                <div className="flex flex-col md:flex-row gap-8 items-start">
+                  <div className="p-5 bg-gold/10 rounded-2xl group-hover:scale-110 transition-transform shadow-xl">
+                    <item.icon className="h-8 w-8 text-gold" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold text-foreground mb-2 group-hover:text-gold transition-colors">
-                      {item.title}
-                    </h3>
-                    <p className="text-muted-foreground text-sm">
-                      {item.description}
-                    </p>
+                    <h4 className="text-2xl font-bold text-white mb-3 tracking-tight group-hover:text-gold transition-colors">{item.title}</h4>
+                    <p className="text-gray-400 text-sm leading-relaxed font-medium">{item.description}</p>
                   </div>
                 </div>
               </div>
@@ -685,110 +495,54 @@ export default function ServiceDetailPage({
         </div>
       </section>
 
-      {/* Technology Stack */}
-      <section className="py-16">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-foreground mb-4">
-              Technology Stack
-            </h2>
-            <p className="text-muted-foreground">
-              The tools and technologies we use for {service.title.toLowerCase()}
-            </p>
-          </div>
-
-          <div className="flex flex-wrap justify-center gap-4 max-w-4xl mx-auto">
-            {service.techStack.map((tech, index) => (
-              <div
-                key={index}
-                className="px-6 py-3 rounded-full glass border border-foreground/10 hover:border-gold/50 hover:bg-gold/5 transition-all duration-300"
-              >
-                <span className="text-foreground font-medium">{tech}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Our Process Timeline */}
-      <section className="py-16 bg-purple-deep/20">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-foreground mb-4">
-              Our Process
-            </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              A proven methodology for delivering successful {service.title.toLowerCase()} projects
-            </p>
-          </div>
-
-          {/* Horizontal Timeline */}
-          <div className="relative max-w-5xl mx-auto">
-            {/* Connection Line */}
-            <div className="absolute top-8 left-0 right-0 h-1 bg-gradient-to-r from-purple-light via-blue-electric to-gold hidden md:block" />
-
-            <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
-              {service.process.map((item, index) => {
-                const ProcessIcon = processIcons[index] || CheckCircle2;
-                return (
-                  <div key={index} className="relative text-center">
-                    {/* Icon Circle */}
-                    <div className="w-16 h-16 mx-auto rounded-full bg-gradient-to-br from-gold to-gold-light flex items-center justify-center mb-4 relative z-10 shadow-lg shadow-gold/25">
-                      <ProcessIcon className="h-7 w-7 text-accent-foreground" />
+      {/* 4. Technology Stack */}
+      <section className="py-24">
+        <div className="container mx-auto px-4 text-center">
+            <h2 className="text-4xl font-bold text-white mb-6 uppercase italic">Stack & Tools</h2>
+            <div className="flex flex-wrap justify-center gap-4 max-w-4xl mx-auto">
+                {service.techStack.map((tech, i) => (
+                    <div key={tech} className="px-8 py-3 rounded-full bg-white/5 border border-white/10 text-white font-bold text-xs uppercase tracking-widest hover:border-gold transition-all">
+                        {tech}
                     </div>
-                    
-                    {/* Step Number */}
-                    <div className="absolute -top-2 -right-2 md:right-1/2 md:translate-x-1/2 w-6 h-6 rounded-full bg-blue-electric flex items-center justify-center text-white text-xs font-bold">
-                      {index + 1}
-                    </div>
-
-                    <h3 className="text-lg font-bold text-foreground mb-2">
-                      {item.step}
-                    </h3>
-                    <p className="text-sm text-muted-foreground">
-                      {item.description}
-                    </p>
-                  </div>
-                );
-              })}
+                ))}
             </div>
+        </div>
+      </section>
+
+      {/* 5. Our Workflow */}
+      <section className="py-24 bg-gradient-to-b from-transparent to-[#0d0d1a]/80">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-4xl font-bold text-white mb-20 tracking-tighter uppercase italic">Our Workflow</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-10 max-w-7xl mx-auto">
+            {service.process.map((p, i) => {
+              const Icon = processIcons[i] || CheckCircle2;
+              return (
+                <div key={i} className="text-center group relative">
+                  <div className="w-20 h-20 bg-gold/5 rounded-full flex items-center justify-center mx-auto mb-8 border border-gold/10 group-hover:bg-gold/10 transition-all shadow-2xl relative z-10">
+                    <span className="absolute -top-1 -right-1 bg-blue-500 text-white w-8 h-8 rounded-full text-[10px] flex items-center justify-center font-black">0{i+1}</span>
+                    <Icon className="h-10 w-10 text-gold" />
+                  </div>
+                  <h5 className="text-lg font-bold text-white mb-3 uppercase tracking-tighter">{p.step}</h5>
+                  <p className="text-gray-500 text-xs leading-relaxed font-medium">{p.description}</p>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-purple-deep via-blue-electric/20 to-purple-deep" />
-        <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-10" />
-
-        <div className="container mx-auto px-4 relative z-10 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
-            Ready to start your{" "}
-            <span className="text-gold">{service.title}</span> project?
-          </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-10">
-            {"Let's discuss how we can help you achieve your goals. Our experts are ready to create a tailored solution for your needs."}
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+      {/* 6. CTA Section */}
+      <section className="py-32 relative overflow-hidden text-center">
+        <div className="absolute inset-0 bg-gold/5" />
+        <div className="container mx-auto px-4 relative z-10">
+            <h2 className="text-5xl md:text-7xl font-black text-white mb-10 tracking-tighter uppercase italic leading-none">
+                Ready to Ignite your <br/> <span className="text-gold">{service.title}</span> Project?
+            </h2>
             <Link href="/contact">
-              <Button
-                size="lg"
-                className="bg-gold text-accent-foreground hover:bg-gold-light font-bold text-lg px-10 py-6 rounded-full shadow-lg shadow-gold/25"
-              >
-                Contact Us
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
+                <Button size="lg" className="bg-gold text-black font-black text-xl px-16 py-8 rounded-2xl shadow-xl transition-all hover:scale-105 active:scale-95">
+                    START YOUR JOURNEY <ArrowRight className="ml-3 h-6 w-6" />
+                </Button>
             </Link>
-            <Link href="/services">
-              <Button
-                size="lg"
-                variant="outline"
-                className="border-gold text-gold hover:bg-gold/10 font-bold text-lg px-10 py-6 rounded-full"
-              >
-                View All Services
-              </Button>
-            </Link>
-          </div>
         </div>
       </section>
 

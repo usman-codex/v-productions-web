@@ -233,6 +233,7 @@ export default function ServicesPage() {
       <Header />
 
       {/* Hero Section */}
+      {/* Hero Section */}
       <section
         ref={heroRef}
         className="relative min-h-[60vh] flex items-center justify-center overflow-hidden pt-32 pb-20"
@@ -270,13 +271,16 @@ export default function ServicesPage() {
               transform businesses and drive measurable results across industries.
             </p>
 
-            <Button
-              size="lg"
-              className="bg-gold text-accent-foreground hover:bg-gold-light font-bold text-lg px-10 py-6 rounded-full shadow-lg shadow-gold/25 hover:shadow-gold/40 transition-all duration-300"
-            >
-              Book a Call
-              <ArrowRight className="ml-2 h-5 w-5" />
-            </Button>
+            {/* Link added here */}
+            <Link href="/contact">
+              <Button
+                size="lg"
+                className="bg-gold text-accent-foreground hover:bg-gold-light font-bold text-lg px-10 py-6 rounded-full shadow-lg shadow-gold/25 hover:shadow-gold/40 transition-all duration-300"
+              >
+                Book a Call
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Button>
+            </Link>
           </div>
         </div>
       </section>

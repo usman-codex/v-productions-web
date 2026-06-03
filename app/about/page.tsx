@@ -43,6 +43,7 @@ function HeroSection() {
 }
 
 // Identity & Pillars Section
+// Identity & Pillars Section
 function IdentitySection() {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
@@ -74,20 +75,26 @@ function IdentitySection() {
     <section ref={sectionRef} className="py-24 bg-card/50">
       <div className="container mx-auto px-4">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Image */}
+          
+          {/* TEAM IMAGE BOX - Updated with real Image tag */}
           <div className={cn(
-            "relative rounded-2xl overflow-hidden aspect-[4/3] transition-all duration-700",
+            "relative rounded-3xl overflow-hidden aspect-[4/3] transition-all duration-1000 shadow-2xl border border-white/10",
             isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-10"
           )}>
-            <div className="absolute inset-0 bg-gradient-to-br from-purple-deep/80 to-blue-electric/60" />
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="text-center">
-                <Users className="h-24 w-24 text-gold mx-auto mb-4" />
-                <p className="text-lg font-semibold text-foreground">Our Team</p>
-                <p className="text-sm text-muted-foreground">Modern Tech Office</p>
-              </div>
+            {/* Yahan apni image ka path dein jo public folder mein ho */}
+            <img 
+              src="/team-office.jpg" 
+              alt="V-Productions Team" 
+              className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
+            />
+            
+            {/* Subtle Gradient Overlay taaki futuristic look barkarar rahe */}
+            <div className="absolute inset-0 bg-gradient-to-t from-purple-deep/40 to-transparent pointer-events-none" />
+            
+            {/* Floating Badge on Image */}
+            <div className="absolute bottom-6 left-6 bg-gold/90 backdrop-blur-md px-6 py-2 rounded-xl text-black font-bold text-sm shadow-xl">
+              Our Professional Team
             </div>
-            <div className="absolute inset-0 border-2 border-gold/30 rounded-2xl" />
           </div>
 
           {/* Content */}
@@ -110,17 +117,17 @@ function IdentitySection() {
                 <div 
                   key={pillar.title}
                   className={cn(
-                    "flex items-start gap-4 p-4 rounded-xl glass transition-all duration-500 hover:golden-glow",
+                    "flex items-start gap-4 p-5 rounded-2xl glass transition-all duration-500 hover:border-gold/30 group",
                     isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
                   )}
                   style={{ transitionDelay: `${300 + index * 100}ms` }}
                 >
-                  <div className="flex-shrink-0 w-10 h-10 rounded-full bg-gold/20 flex items-center justify-center">
-                    <Check className="h-5 w-5 text-gold" />
+                  <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-gold/10 flex items-center justify-center group-hover:bg-gold/20 transition-colors">
+                    <Check className="h-6 w-6 text-gold" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-foreground text-lg">{pillar.title}</h3>
-                    <p className="text-muted-foreground">{pillar.description}</p>
+                    <h3 className="font-bold text-foreground text-lg">{pillar.title}</h3>
+                    <p className="text-muted-foreground text-sm leading-relaxed">{pillar.description}</p>
                   </div>
                 </div>
               ))}
@@ -131,7 +138,6 @@ function IdentitySection() {
     </section>
   );
 }
-
 // Mission & Vision Section
 function MissionVisionSection() {
   const [isVisible, setIsVisible] = useState(false);
@@ -205,125 +211,35 @@ function MissionVisionSection() {
             </div>
           </div>
 
-          {/* Futuristic Globe Image */}
+          {/* IMAGE SECTION - Globe ki jagah ab image aayegi */}
           <div className={cn(
-            "relative aspect-square max-w-md mx-auto transition-all duration-700 delay-300",
+            "relative aspect-square max-w-md mx-auto transition-all duration-1000 delay-300",
             isVisible ? "opacity-100 scale-100" : "opacity-0 scale-90"
           )}>
-            <div className="absolute inset-0 rounded-full bg-gradient-to-br from-blue-electric/30 to-purple-deep/30 animate-pulse" />
-            <div className="absolute inset-4 rounded-full bg-gradient-to-br from-blue-electric/20 to-transparent border border-blue-electric/40" />
-            <div className="absolute inset-8 rounded-full bg-gradient-to-br from-gold/10 to-transparent border border-gold/30" />
-            <div className="absolute inset-0 flex items-center justify-center">
-              <Globe2 className="h-32 w-32 text-gold animate-float" />
+            {/* Futuristic Decorative Background Orbs */}
+            <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-blue-electric/20 to-purple-deep/30 blur-2xl animate-pulse" />
+            
+            {/* Real Image Tag */}
+            <div className="relative w-full h-full rounded-[2.5rem] overflow-hidden border border-white/10 shadow-2xl z-10">
+              <img 
+                src="/mission-vision.jpg" 
+                alt="Our Vision and Mission" 
+                className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
+              />
+              {/* Overlay Overlay to match theme */}
+              <div className="absolute inset-0 bg-gradient-to-tr from-purple-deep/40 to-transparent pointer-events-none" />
             </div>
-            {/* Orbiting dots */}
-            <div className="absolute inset-0 animate-rotate-badge">
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-gold" />
-              <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-blue-electric" />
-              <div className="absolute left-0 top-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-purple-light" />
-              <div className="absolute right-0 top-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-gold-light" />
-            </div>
+
+            {/* Floating Glow Border */}
+            <div className="absolute -inset-4 border border-gold/20 rounded-[3rem] animate-pulse pointer-events-none" />
           </div>
         </div>
       </div>
     </section>
   );
 }
-
 // Timeline Section
-function TimelineSection() {
-  const [visibleItems, setVisibleItems] = useState<number[]>([]);
-  const timelineRef = useRef<HTMLElement>(null);
 
-  const timelineData = [
-    { year: "2018", title: "ERP & E-commerce Launch", description: "Founded V-Productions with a focus on enterprise solutions and e-commerce platforms." },
-    { year: "2019", title: "LMS Revolution", description: "Launched our Learning Management System division, transforming education technology." },
-    { year: "2020", title: "CRM & HRMS Solutions", description: "Expanded our portfolio with comprehensive CRM and HR management systems." },
-    { year: "2021", title: "International Expansion", description: "Opened our first international office in Saudi Arabia, marking global growth." },
-    { year: "2022-24", title: "Global Presence", description: "Established US operations and expanded to multiple international markets." },
-    { year: "2025", title: "Industry Leadership", description: "Recognized as a leading tech agency with 50+ clients and 100+ successful projects." },
-  ];
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const index = Number(entry.target.getAttribute('data-index'));
-            setVisibleItems((prev) => [...new Set([...prev, index])]);
-          }
-        });
-      },
-      { threshold: 0.5 }
-    );
-
-    const items = timelineRef.current?.querySelectorAll('.timeline-item');
-    items?.forEach((item) => observer.observe(item));
-
-    return () => observer.disconnect();
-  }, []);
-
-  return (
-    <section ref={timelineRef} className="py-24 bg-card/50">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Our <span className="text-gold">Journey</span>
-          </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
-            From humble beginnings to global recognition, our timeline reflects our commitment to growth and innovation.
-          </p>
-        </div>
-
-        <div className="relative max-w-3xl mx-auto">
-          {/* Center Line */}
-          <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-gold via-blue-electric to-purple-deep -translate-x-1/2" />
-
-          {timelineData.map((item, index) => (
-            <div
-              key={item.year}
-              data-index={index}
-              className={cn(
-                "timeline-item relative flex items-center mb-12 last:mb-0",
-                index % 2 === 0 ? "flex-row" : "flex-row-reverse"
-              )}
-            >
-              {/* Content */}
-              <div className={cn(
-                "w-5/12 transition-all duration-700",
-                visibleItems.includes(index) 
-                  ? "opacity-100 translate-x-0" 
-                  : index % 2 === 0 ? "opacity-0 -translate-x-10" : "opacity-0 translate-x-10"
-              )}>
-                <div className={cn(
-                  "glass rounded-xl p-6 golden-glow-hover",
-                  index % 2 === 0 ? "text-right" : "text-left"
-                )}>
-                  <span className="text-gold font-bold text-lg">{item.year}</span>
-                  <h3 className="font-semibold text-foreground text-xl mt-1">{item.title}</h3>
-                  <p className="text-muted-foreground mt-2 text-sm">{item.description}</p>
-                </div>
-              </div>
-
-              {/* Center Node */}
-              <div className="w-2/12 flex justify-center">
-                <div className={cn(
-                  "w-5 h-5 rounded-full border-4 border-background transition-all duration-500 z-10",
-                  visibleItems.includes(index) 
-                    ? "bg-gold scale-100 shadow-[0_0_20px_oklch(0.75_0.15_85/0.8)]" 
-                    : "bg-muted scale-75"
-                )} />
-              </div>
-
-              {/* Spacer */}
-              <div className="w-5/12" />
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
 
 // Core Philosophy Section
 function PhilosophySection() {
@@ -520,12 +436,12 @@ function JoinUsCTA() {
 
   return (
     <section ref={sectionRef} className="py-24 bg-gradient-to-br from-purple-deep via-background to-background relative overflow-hidden">
-      {/* Background Effects */}
+      {/* Futuristic Background Glow */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-gold/10 via-transparent to-transparent" />
       
       <div className="container mx-auto px-4 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Content */}
+          {/* Content (Left Side) */}
           <div className={cn(
             "transition-all duration-700",
             isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-10"
@@ -538,37 +454,43 @@ function JoinUsCTA() {
               with our solutions or join our team of innovators, we would love to hear from you. 
               Let us build the future together.
             </p>
+            
+            {/* CONTACT US Button - Linked to /contact */}
             <Link href="/contact">
               <Button 
                 size="lg" 
-                className="bg-gold text-accent-foreground hover:bg-gold-light font-bold text-lg px-10 py-6 animate-pulse-glow"
+                className="bg-gold text-black font-black text-lg px-10 py-7 rounded-2xl shadow-[0_0_30px_rgba(212,175,55,0.3)] hover:shadow-[0_0_50px_rgba(212,175,55,0.5)] transition-all active:scale-95"
               >
                 CONTACT US
               </Button>
             </Link>
           </div>
 
-          {/* Image Placeholder */}
+          {/* IMAGE BOX (Right Side) - Updated with real Image */}
           <div className={cn(
-            "relative aspect-[4/3] rounded-2xl overflow-hidden transition-all duration-700 delay-200",
+            "relative aspect-[4/3] rounded-[2.5rem] overflow-hidden transition-all duration-1000 delay-200 border border-white/10 shadow-2xl",
             isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-10"
           )}>
-            <div className="absolute inset-0 bg-gradient-to-br from-gold/20 via-blue-electric/20 to-purple-deep/40" />
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="text-center">
-                <Users className="h-20 w-20 text-gold mx-auto mb-4" />
-                <p className="text-lg font-semibold text-foreground">Join Our Team</p>
-                <p className="text-sm text-muted-foreground">Professional Recruitment</p>
-              </div>
+            {/* Yahan apni picture ka path dein jo public folder mein ho */}
+            <img 
+              src="/join-vision.jpg" 
+              alt="Join V-Productions" 
+              className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
+            />
+            
+            {/* Subtle Overlays taaki futuristic dark theme barkarar rahe */}
+            <div className="absolute inset-0 bg-gradient-to-br from-gold/10 via-blue-electric/10 to-purple-deep/40 pointer-events-none" />
+            
+            {/* Floating Info Badge on Image */}
+            <div className="absolute top-6 left-6 bg-gold/90 backdrop-blur-md px-5 py-2 rounded-xl text-black font-bold text-xs tracking-widest uppercase">
+              Now Hiring
             </div>
-            <div className="absolute inset-0 border-2 border-gold/30 rounded-2xl" />
           </div>
         </div>
       </div>
     </section>
   );
 }
-
 // Main About Page
 export default function AboutPage() {
   return (
@@ -577,7 +499,7 @@ export default function AboutPage() {
       <HeroSection />
       <IdentitySection />
       <MissionVisionSection />
-      <TimelineSection />
+      
       <PhilosophySection />
       <StorySection />
       <JoinUsCTA />
