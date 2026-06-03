@@ -70,7 +70,7 @@
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Custom Text and Glow */
+
 .gradient-text {
   background: linear-gradient(135deg, var(--gold) 0%, var(--blue-electric) 100%);
   -webkit-background-clip: text;
