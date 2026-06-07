@@ -61,7 +61,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body
-        className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased`}
+        className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased overflow-x-hidden w-full `}
       >
         {children}
         {process.env.NODE_ENV === "production" && <Analytics />}

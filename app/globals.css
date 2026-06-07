@@ -92,3 +92,15 @@ html {
 .hide-scrollbar::-webkit-scrollbar {
   display: none;
 }
+
+
+
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+  position: relative;
+}
+
+* {
+  box-sizing: border-box;
+}

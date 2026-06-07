@@ -80,7 +80,7 @@ export function HeroSection() {
             </p>
           </div>
           
-          <h1 className="text-4xl sm:text-6xl md:text-[80px] font-black text-white leading-[1] tracking-tight mb-8 drop-shadow-2xl">
+          <h1 className="text-4xl  sm:text-6xl md:text-[80px] font-black text-white leading-[1] tracking-tight mb-8 drop-shadow-2xl">
             Transforming Ideas Into
             <span className="block mt-3 bg-gradient-to-r from-blue-400 via-sky-400 to-indigo-500 bg-clip-text text-transparent italic">
               Digital Reality
