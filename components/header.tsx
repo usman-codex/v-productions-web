@@ -99,7 +99,7 @@ export function Header() {
             <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-gold to-gold-dark flex items-center justify-center">
               <span className="text-accent-foreground font-bold text-lg">V</span>
             </div>
-            <div className="hidden sm:block">
+            <div className="flex flex-col sm:block">
               <span className="font-bold text-lg text-foreground">
                 V-Productions
               </span>
