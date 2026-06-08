@@ -62,7 +62,7 @@ function StatCard({ icon: Icon, value, suffix, label, inView }: {
         <span className="text-3xl md:text-4xl font-bold text-gold">{suffix}</span>
       </div>
       
-      <p className="mt-3 text-gray-400 font-medium text-lg uppercase tracking-wide text-xs">
+      <p className="mt-3 text-gray-400 font-medium  uppercase tracking-wide text-xs">
         {label}
       </p>
     </div>
