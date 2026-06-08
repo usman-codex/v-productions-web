@@ -29,7 +29,7 @@ const models = [
 export function EngagementModels() {
   return (
     <section className="py-24 relative overflow-hidden">
-      {/* Background */}
+      
       <div className="absolute inset-0 bg-gradient-to-b from-card via-background to-card" />
 
       <div className="container mx-auto px-4 relative z-10">
@@ -48,7 +48,7 @@ export function EngagementModels() {
               key={index}
               className="group glass rounded-2xl p-8 hover:scale-105 transition-all duration-300 golden-glow-hover relative overflow-hidden"
             >
-              {/* Background Glow */}
+              
               <div
                 className={`absolute top-0 right-0 w-32 h-32 bg-${model.color}/20 rounded-full blur-3xl transition-opacity duration-300 opacity-0 group-hover:opacity-100`}
               />

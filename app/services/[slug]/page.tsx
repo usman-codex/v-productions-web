@@ -44,7 +44,7 @@ import {
   Briefcase,
 } from "lucide-react";
 
-// --- INTERFACE ---
+
 interface ServiceData {
   title: string;
   tagline: string;
@@ -62,7 +62,7 @@ interface ServiceData {
   }[];
 }
 
-// --- ALL SERVICES DATA (MUKAMMAL 13 CATEGORIES) ---
+
 const servicesData: Record<string, ServiceData> = {
   "web-development": {
     title: "Web Development",
@@ -390,7 +390,7 @@ const servicesData: Record<string, ServiceData> = {
   },
 };
 
-// --- FALLBACK ---
+
 const defaultService: ServiceData = {
   title: "Service Category",
   tagline: "Excellence in Digital Solutions",
@@ -407,7 +407,7 @@ const defaultService: ServiceData = {
   ],
 };
 
-// --- MAIN COMPONENT ---
+
 export default function ServiceDetailPage({ params }: { params: { slug: string } }) {
   const service = servicesData[params.slug] || defaultService;
   const [isVisible, setIsVisible] = useState(false);
@@ -442,7 +442,7 @@ export default function ServiceDetailPage({ params }: { params: { slug: string }
         </div>
       </section>
 
-      {/* 2. What We Offer (With Image) */}
+      
       <section className="py-24">
         <div className="container mx-auto px-4 grid lg:grid-cols-2 gap-16 items-center">
           <div className="space-y-8">
@@ -473,7 +473,7 @@ export default function ServiceDetailPage({ params }: { params: { slug: string }
         </div>
       </section>
 
-      {/* 3. Core Expertise Grid */}
+      
       <section className="py-24 bg-[#0d0d1a]/50 relative border-y border-white/5">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-5xl font-bold text-white mb-16 tracking-tight">Core <span className="text-gold">Expertise</span></h2>
@@ -495,7 +495,7 @@ export default function ServiceDetailPage({ params }: { params: { slug: string }
         </div>
       </section>
 
-      {/* 4. Technology Stack */}
+   
       <section className="py-24">
         <div className="container mx-auto px-4 text-center">
             <h2 className="text-4xl font-bold text-white mb-6 uppercase italic">Stack & Tools</h2>
@@ -509,7 +509,7 @@ export default function ServiceDetailPage({ params }: { params: { slug: string }
         </div>
       </section>
 
-      {/* 5. Our Workflow */}
+     
       <section className="py-24 bg-gradient-to-b from-transparent to-[#0d0d1a]/80">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-4xl font-bold text-white mb-20 tracking-tighter uppercase italic">Our Workflow</h2>
@@ -531,7 +531,7 @@ export default function ServiceDetailPage({ params }: { params: { slug: string }
         </div>
       </section>
 
-      {/* 6. CTA Section */}
+      
       <section className="py-32 relative overflow-hidden text-center">
         <div className="absolute inset-0 bg-gold/5" />
         <div className="container mx-auto px-4 relative z-10">

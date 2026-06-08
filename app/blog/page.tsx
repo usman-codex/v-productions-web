@@ -35,10 +35,10 @@ export default function BlogPage() {
     fetch();
   }, []);
 
-  // Featured Logic: Sabse naya featured blog ya phir pehla blog
+
   const featured = blogs.find((b) => b.is_featured) || blogs[0];
 
-  // Grid Blogs: Jo featured nahi hain
+
   const regularBlogs = blogs.filter((b) => b.id !== featured?.id);
 
   const filtered = regularBlogs.filter(
@@ -58,7 +58,7 @@ export default function BlogPage() {
     <main className="min-h-screen bg-[#060610] text-white pt-20">
       <Header />
 
-      {/* 1. HERO SECTION (Search & Filter) */}
+      
       <section className="py-20 bg-gradient-to-b from-purple-deep/10 to-transparent text-center">
         <div className="container mx-auto px-4">
           <h1 className="text-5xl md:text-7xl font-black mb-8 italic tracking-tighter">
@@ -92,7 +92,7 @@ export default function BlogPage() {
         </div>
       </section>
 
-      {/* 2. FEATURED POST (Latest Highlight) */}
+      
       {featured && (
         <section className="container mx-auto px-4 pb-20">
           <div className="bg-[#0d0d1a] rounded-[3rem] overflow-hidden border border-white/5 flex flex-col lg:flex-row group transition-all hover:border-gold/20 shadow-2xl">
@@ -133,10 +133,10 @@ export default function BlogPage() {
         </section>
       )}
 
-      {/* 3. MAIN CONTENT: Grid & Sidebar */}
+     
       <section className="container mx-auto px-4 pb-32">
         <div className="grid lg:grid-cols-12 gap-12">
-          {/* LEFT: Dynamic Blog Cards */}
+         
           <div className="lg:col-span-8 space-y-12">
             <h2 className="text-2xl font-bold flex items-center gap-2">
               <div className="w-8 h-1 bg-gold rounded-full"></div> More Articles
@@ -188,9 +188,9 @@ export default function BlogPage() {
             </div>
           </div>
 
-          {/* RIGHT: Sidebar (Stay Updated & Ad Spot) */}
+          
           <aside className="lg:col-span-4 space-y-10">
-            {/* NEWSLETTER: Stay Updated */}
+            
             <div className="bg-gradient-to-br from-blue-900/20 to-purple-900/10 p-8 rounded-[2.5rem] border border-blue-500/20 shadow-xl relative overflow-hidden group">
               <div className="absolute -top-10 -right-10 w-32 h-32 bg-blue-500/10 blur-3xl group-hover:bg-blue-500/20 transition-all" />
               <Mail className="text-blue-400 mb-4" size={32} />
@@ -216,7 +216,7 @@ export default function BlogPage() {
               </p>
             </div>
 
-            {/* ADVERTISEMENT SPOT: Sticky */}
+          
             <div className="sticky top-28 space-y-6">
               <div className="aspect-[4/5] bg-[#0d0d1a] rounded-[2.5rem] border-2 border-dashed border-white/5 flex flex-col items-center justify-center p-8 text-center group hover:border-gold/20 transition-all">
                 <div className="w-20 h-20 bg-white/5 rounded-full flex items-center justify-center mb-4 text-gray-600 group-hover:text-gold transition-colors">
@@ -230,7 +230,7 @@ export default function BlogPage() {
                 </p>
               </div>
 
-              {/* Quick Stats or Categories can go here too */}
+              
               <div className="bg-white/5 p-6 rounded-3xl border border-white/5">
                 <h4 className="font-bold text-xs uppercase tracking-widest text-gold mb-4">
                   Quick Links

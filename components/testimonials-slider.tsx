@@ -57,7 +57,7 @@ export function TestimonialsSlider() {
 
   return (
     <section className="py-24 bg-card relative overflow-hidden">
-      {/* Background */}
+    
       <div className="absolute inset-0 bg-gradient-to-b from-background via-card to-background" />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-purple-deep/10 rounded-full blur-3xl" />
 
@@ -71,15 +71,15 @@ export function TestimonialsSlider() {
           </p>
         </div>
 
-        {/* Testimonial Card */}
+       
         <div className="max-w-4xl mx-auto">
           <div className="glass-strong rounded-3xl p-8 md:p-12 relative">
-            {/* Quote Icon */}
+          
             <div className="absolute -top-6 left-8 w-12 h-12 rounded-full bg-gold flex items-center justify-center">
               <Quote className="h-6 w-6 text-accent-foreground" />
             </div>
 
-            {/* Content */}
+         
             <div className="text-center pt-4">
               {testimonials.map((testimonial, index) => (
                 <div
@@ -108,7 +108,7 @@ export function TestimonialsSlider() {
               ))}
             </div>
 
-            {/* Navigation */}
+            
             <div className="flex items-center justify-center gap-4 mt-8">
               <button
                 onClick={prev}

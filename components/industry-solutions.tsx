@@ -12,7 +12,7 @@ const industries = [
     title: "Healthcare Solutions",
     description: "Transform patient care with our comprehensive healthcare technology solutions. From electronic health records to telemedicine platforms, we build HIPAA-compliant systems that improve outcomes and operational efficiency.",
     features: ["Patient Management Systems", "Telemedicine Platforms", "Medical IoT Integration", "Healthcare Analytics"],
-    image: "/industries/healthcare.jpg", // Local image path
+    image: "/industries/healthcare.jpg", 
   },
   {
     id: "fintech",
@@ -21,7 +21,7 @@ const industries = [
     title: "Financial Technology",
     description: "Revolutionize financial services with secure, scalable fintech solutions. We specialize in building payment processing systems, banking applications, and investment platforms that meet regulatory standards.",
     features: ["Payment Gateways", "Banking Applications", "Investment Platforms", "Blockchain Solutions"],
-    image: "/industries/fintech.jpg", // Local image path
+    image: "/industries/fintech.jpg", 
   },
   {
     id: "retail",
@@ -30,7 +30,7 @@ const industries = [
     title: "Retail & E-Commerce",
     description: "Elevate your retail business with cutting-edge e-commerce solutions. Our platforms drive sales, enhance customer experience, and streamline operations from inventory to delivery.",
     features: ["E-Commerce Platforms", "Inventory Management", "Customer Analytics", "Omnichannel Solutions"],
-    image: "/industries/retail.jpg", // Local image path
+    image: "/industries/retail.jpg", 
   },
   {
     id: "enterprise",
@@ -39,7 +39,7 @@ const industries = [
     title: "Enterprise Solutions",
     description: "Empower your enterprise with robust, scalable software solutions. We build custom ERP systems, workflow automation tools, and integration platforms that drive digital transformation.",
     features: ["Custom ERP Systems", "Workflow Automation", "System Integration", "Business Intelligence"],
-    image: "/industries/enterprise.jpg", // Local image path
+    image: "/industries/enterprise.jpg",
   },
 ];
 
@@ -48,9 +48,9 @@ export function IndustrySolutions() {
   const activeIndustry = industries.find((i) => i.id === activeTab)!;
 
   return (
-    // Gap kam karne ke liye pt-24 ko pt-12 kar diya gaya hai
+    
     <section className="pt-12 pb-24 bg-card relative overflow-hidden">
-      {/* Background Glow */}
+      
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-purple-deep/20 rounded-full blur-3xl" />
 
       <div className="container mx-auto px-4 relative z-10">
@@ -63,7 +63,7 @@ export function IndustrySolutions() {
           </p>
         </div>
 
-        {/* Tabs */}
+        
         <div className="flex flex-wrap justify-center gap-4 mb-12">
           {industries.map((industry) => (
             <button
@@ -82,10 +82,10 @@ export function IndustrySolutions() {
           ))}
         </div>
 
-        {/* Content Section */}
+       
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           
-          {/* Local Image (No Video/Watch-time) */}
+         
           <div className="relative">
             <div className="aspect-[4/3] rounded-3xl overflow-hidden border border-white/10">
               <img 
@@ -93,17 +93,17 @@ export function IndustrySolutions() {
                 alt={activeIndustry.title}
                 className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
               />
-              {/* Overlay for better blending */}
+             
               <div className="absolute inset-0 bg-gradient-to-t from-background/60 to-transparent" />
             </div>
             
-            {/* Industry Icon Badge */}
+            
             <div className="absolute -bottom-4 -right-4 bg-gold rounded-2xl p-5 shadow-2xl">
               <activeIndustry.icon className="h-8 w-8 text-black" />
             </div>
           </div>
 
-          {/* Text Content */}
+          
           <div className="space-y-6">
             <h3 className="text-3xl font-bold text-foreground">
               {activeIndustry.title}

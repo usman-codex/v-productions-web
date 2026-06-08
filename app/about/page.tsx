@@ -8,15 +8,13 @@ import { Check, Lightbulb, Shield, Target, Eye, Users, Sparkles, Award, Globe2, 
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 
-// Hero Section
+
 function HeroSection() {
   return (
-    <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden pt-32">
-      {/* Background */}
+    <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden pt-32"> 
       <div className="absolute inset-0 bg-gradient-to-br from-purple-deep via-background to-background" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-electric/20 via-transparent to-transparent" />
       
-      {/* Grid Pattern */}
       <div 
         className="absolute inset-0 opacity-10"
         style={{
@@ -36,14 +34,11 @@ function HeroSection() {
         </p>
       </div>
 
-      {/* Decorative Elements */}
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent" />
     </section>
   );
 }
 
-// Identity & Pillars Section
-// Identity & Pillars Section
 function IdentitySection() {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
@@ -76,28 +71,23 @@ function IdentitySection() {
       <div className="container mx-auto px-4">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           
-          {/* TEAM IMAGE BOX - Updated with real Image tag */}
           <div className={cn(
             "relative rounded-3xl overflow-hidden aspect-[4/3] transition-all duration-1000 shadow-2xl border border-white/10",
             isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-10"
           )}>
-            {/* Yahan apni image ka path dein jo public folder mein ho */}
             <img 
               src="/team-office.jpg" 
               alt="V-Productions Team" 
               className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
             />
             
-            {/* Subtle Gradient Overlay taaki futuristic look barkarar rahe */}
             <div className="absolute inset-0 bg-gradient-to-t from-purple-deep/40 to-transparent pointer-events-none" />
             
-            {/* Floating Badge on Image */}
             <div className="absolute bottom-6 left-6 bg-gold/90 backdrop-blur-md px-6 py-2 rounded-xl text-black font-bold text-sm shadow-xl">
               Our Professional Team
             </div>
           </div>
 
-          {/* Content */}
           <div className={cn(
             "transition-all duration-700 delay-200",
             isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-10"
@@ -138,7 +128,6 @@ function IdentitySection() {
     </section>
   );
 }
-// Mission & Vision Section
 function MissionVisionSection() {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
@@ -162,7 +151,6 @@ function MissionVisionSection() {
 
   return (
     <section ref={sectionRef} className="py-24 bg-background relative overflow-hidden">
-      {/* Background Pattern */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute inset-0" style={{
           backgroundImage: `radial-gradient(circle at 2px 2px, oklch(0.75 0.15 85) 1px, transparent 0)`,
@@ -172,9 +160,7 @@ function MissionVisionSection() {
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Mission & Vision Cards */}
           <div className="space-y-6">
-            {/* Mission Card */}
             <div className={cn(
               "glass-strong rounded-2xl p-8 transition-all duration-700 golden-glow-hover",
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
@@ -192,7 +178,6 @@ function MissionVisionSection() {
               </p>
             </div>
 
-            {/* Vision Card */}
             <div className={cn(
               "glass-strong rounded-2xl p-8 transition-all duration-700 delay-200 golden-glow-hover",
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
@@ -211,26 +196,21 @@ function MissionVisionSection() {
             </div>
           </div>
 
-          {/* IMAGE SECTION - Globe ki jagah ab image aayegi */}
           <div className={cn(
             "relative aspect-square max-w-md mx-auto transition-all duration-1000 delay-300",
             isVisible ? "opacity-100 scale-100" : "opacity-0 scale-90"
           )}>
-            {/* Futuristic Decorative Background Orbs */}
             <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-blue-electric/20 to-purple-deep/30 blur-2xl animate-pulse" />
             
-            {/* Real Image Tag */}
             <div className="relative w-full h-full rounded-[2.5rem] overflow-hidden border border-white/10 shadow-2xl z-10">
               <img 
                 src="/mission-vision.jpg" 
                 alt="Our Vision and Mission" 
                 className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
               />
-              {/* Overlay Overlay to match theme */}
               <div className="absolute inset-0 bg-gradient-to-tr from-purple-deep/40 to-transparent pointer-events-none" />
             </div>
 
-            {/* Floating Glow Border */}
             <div className="absolute -inset-4 border border-gold/20 rounded-[3rem] animate-pulse pointer-events-none" />
           </div>
         </div>
@@ -238,10 +218,7 @@ function MissionVisionSection() {
     </section>
   );
 }
-// Timeline Section
 
-
-// Core Philosophy Section
 function PhilosophySection() {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
@@ -292,7 +269,6 @@ function PhilosophySection() {
               )}
               style={{ transitionDelay: `${index * 100}ms` }}
             >
-              {/* Glow Effect */}
               <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" 
                 style={{ boxShadow: '0 0 30px oklch(0.55 0.25 250 / 0.3)' }} />
               
@@ -311,7 +287,6 @@ function PhilosophySection() {
   );
 }
 
-// Our Story Section
 function StorySection() {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
@@ -343,7 +318,6 @@ function StorySection() {
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12 max-w-5xl mx-auto">
-          {/* Left Column */}
           <div className={cn(
             "transition-all duration-700",
             isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-10"
@@ -374,7 +348,6 @@ function StorySection() {
             </div>
           </div>
 
-          {/* Right Column */}
           <div className={cn(
             "transition-all duration-700 delay-200",
             isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-10"
@@ -412,7 +385,6 @@ function StorySection() {
   );
 }
 
-// Join Us CTA Section
 function JoinUsCTA() {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
@@ -436,12 +408,10 @@ function JoinUsCTA() {
 
   return (
     <section ref={sectionRef} className="py-24 bg-gradient-to-br from-purple-deep via-background to-background relative overflow-hidden">
-      {/* Futuristic Background Glow */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-gold/10 via-transparent to-transparent" />
       
       <div className="container mx-auto px-4 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Content (Left Side) */}
           <div className={cn(
             "transition-all duration-700",
             isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-10"
@@ -455,7 +425,6 @@ function JoinUsCTA() {
               Let us build the future together.
             </p>
             
-            {/* CONTACT US Button - Linked to /contact */}
             <Link href="/contact">
               <Button 
                 size="lg" 
@@ -466,22 +435,18 @@ function JoinUsCTA() {
             </Link>
           </div>
 
-          {/* IMAGE BOX (Right Side) - Updated with real Image */}
           <div className={cn(
             "relative aspect-[4/3] rounded-[2.5rem] overflow-hidden transition-all duration-1000 delay-200 border border-white/10 shadow-2xl",
             isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-10"
           )}>
-            {/* Yahan apni picture ka path dein jo public folder mein ho */}
             <img 
               src="/join-vision.jpg" 
               alt="Join V-Productions" 
               className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
             />
             
-            {/* Subtle Overlays taaki futuristic dark theme barkarar rahe */}
             <div className="absolute inset-0 bg-gradient-to-br from-gold/10 via-blue-electric/10 to-purple-deep/40 pointer-events-none" />
             
-            {/* Floating Info Badge on Image */}
             <div className="absolute top-6 left-6 bg-gold/90 backdrop-blur-md px-5 py-2 rounded-xl text-black font-bold text-xs tracking-widest uppercase">
               Now Hiring
             </div>
@@ -491,7 +456,6 @@ function JoinUsCTA() {
     </section>
   );
 }
-// Main About Page
 export default function AboutPage() {
   return (
     <main className="min-h-screen bg-background">

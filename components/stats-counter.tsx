@@ -48,13 +48,13 @@ function StatCard({ icon: Icon, value, suffix, label, inView }: {
   const count = useCountUp(value, 2000, inView);
 
   return (
-    // 'glass' se background hatane ke liye use 'bg-white/5' aur 'backdrop-blur' manually
+    
     <div className="bg-white/5 border border-white/10 backdrop-blur-sm rounded-[2rem] p-8 text-center group hover:border-gold/30 transition-all duration-500">
       <div className="w-16 h-16 mx-auto mb-6 rounded-2xl bg-gold/10 flex items-center justify-center group-hover:scale-110 transition-transform">
         <Icon className="h-8 w-8 text-gold" />
       </div>
       
-      {/* Numbers Section - Ab yahan koi background nahi aayega */}
+      
       <div className="flex items-center justify-center gap-1 bg-transparent">
         <span className="text-4xl md:text-5xl font-black text-gold tracking-tighter">
           {count}
@@ -94,7 +94,7 @@ export function StatsCounter() {
 
   return (
     <section ref={sectionRef} className="py-24 bg-[#060610] relative overflow-hidden">
-      {/* Soft Background Glows */}
+     
       <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
         <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-purple-900/10 rounded-full blur-[120px]" />
         <div className="absolute bottom-[-10%] right-[-10%] w-[500px] h-[500px] bg-blue-900/10 rounded-full blur-[120px]" />

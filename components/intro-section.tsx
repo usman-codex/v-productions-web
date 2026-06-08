@@ -11,32 +11,32 @@ const products = [
 
 export function IntroSection() {
   return (
-    // Gap kam karne ke liye py-24 ko pt-6 pb-20 kar diya gaya hai
+    
     <section className="pt-6 pb-20 bg-card relative overflow-hidden">
-      {/* Decorative Elements */}
+      
       <div className="absolute top-0 right-0 w-96 h-96 bg-purple-deep/20 rounded-full blur-3xl" />
       <div className="absolute bottom-0 left-0 w-64 h-64 bg-blue-electric/10 rounded-full blur-3xl" />
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           
-          {/* Image Section (Video aur Watch-time remove kar diya) */}
+         
           <div className="relative group">
             <div className="aspect-video rounded-3xl overflow-hidden border border-white/10 shadow-2xl relative">
               <img 
-                src="/about-us.jpg" // Local memory (public folder) se image
+                src="/about-us.jpg" 
                 alt="About V-Productions"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
               />
-              {/* Soft Gradient Overlay for professional look */}
+             
               <div className="absolute inset-0 bg-gradient-to-tr from-purple-deep/40 to-transparent pointer-events-none" />
             </div>
             
-            {/* Chota decorative element video caption ki jagah */}
+           
             <div className="absolute -bottom-4 -left-4 bg-gold w-20 h-20 rounded-2xl -z-10 opacity-50 blur-xl animate-pulse" />
           </div>
 
-          {/* Content Section */}
+          
           <div className="space-y-6">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight">
               Business Solutions{" "}

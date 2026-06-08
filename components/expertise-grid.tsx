@@ -70,7 +70,7 @@ export function ExpertiseGrid() {
   return (
     <section className="py-20 bg-background">
       <div className="container mx-auto px-4">
-        {/* Section Header */}
+        
         <div className="text-center mb-16">
           <motion.span
             initial={{ opacity: 0, y: 20 }}
@@ -100,7 +100,7 @@ export function ExpertiseGrid() {
           </motion.p>
         </div>
 
-        {/* 4-Column Grid */}
+        
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {expertiseCategories.map((category, index) => (
             <motion.div
@@ -113,7 +113,7 @@ export function ExpertiseGrid() {
               className="group cursor-pointer"
             >
               <div className="h-full flex flex-col overflow-hidden rounded-xl transition-all duration-300">
-                {/* Header Bar */}
+               
                 <div
                   className={`${category.headerColor} px-5 py-4 rounded-t-xl transition-all duration-300 group-hover:shadow-lg ${category.glowColor}`}
                 >
@@ -122,7 +122,7 @@ export function ExpertiseGrid() {
                   </h3>
                 </div>
 
-                {/* Body */}
+               
                 <div className="flex-1 bg-zinc-900 px-5 py-6 rounded-b-xl border border-zinc-800 border-t-0 transition-all duration-300 group-hover:border-zinc-700">
                   <ul className="space-y-3">
                     {category.technologies.map((tech, techIndex) => (

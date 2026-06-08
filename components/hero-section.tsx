@@ -50,7 +50,7 @@ export function HeroSection() {
   return (
     <section id="home" className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-[#060610]">
       
-      {/* Background Images Slider - Made Brighter */}
+      
       <div className="absolute inset-0 z-0">
         {images.map((image, index) => (
           <div
@@ -61,13 +61,13 @@ export function HeroSection() {
             )}
           >
             <div
-              className="absolute inset-0 bg-[length:100%_100%] bg-center bg-no-repeat brightness-90" // Increased brightness
+              className="absolute inset-0 bg-[length:100%_100%] bg-center bg-no-repeat brightness-90"
               style={{ backgroundImage: `url(${image})` }}
             />
           </div>
         ))}
-        {/* Lighter Overlays for better visibility */}
-        <div className="absolute inset-0 bg-black/30 z-10" /> {/* Reduced from 60 to 30 */}
+        
+        <div className="absolute inset-0 bg-black/30 z-10" />
         <div className="absolute inset-0 bg-gradient-to-b from-[#060610]/60 via-transparent to-[#060610] z-10" />
       </div>
 
@@ -110,7 +110,7 @@ export function HeroSection() {
         </div>
       </div>
 
-      {/* Dots */}
+     
       <div className="absolute bottom-5 left-0 right-0 z-30 flex justify-center items-center gap-4">
         {images.map((_, index) => (
           <button

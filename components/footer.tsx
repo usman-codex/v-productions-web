@@ -30,13 +30,11 @@ const socialLinks = [
 export function Footer() {
   return (
     <>
-      <footer className="bg-purple-deep/80 pt-16 pb-8 relative overflow-hidden">
-        {/* Background */}
+      <footer className="bg-purple-deep/80 pt-16 pb-8 relative overflow-hidden"> 
         <div className="absolute inset-0 bg-gradient-to-t from-background/50 to-transparent" />
-
         <div className="container mx-auto px-4 relative z-10">
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
-            {/* About */}
+          
             <div className="space-y-4">
               <div className="flex items-center gap-2">
                 <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-gold to-gold-dark flex items-center justify-center">
@@ -64,7 +62,6 @@ export function Footer() {
               </div>
             </div>
 
-            {/* Quick Links */}
             <div>
               <h4 className="font-bold text-foreground mb-6 text-lg">Quick Links</h4>
               <ul className="space-y-3">
@@ -80,8 +77,7 @@ export function Footer() {
                 ))}
               </ul>
             </div>
-
-            {/* Services */}
+          
             <div>
               <h4 className="font-bold text-foreground mb-6 text-lg">Major Services</h4>
               <ul className="space-y-3">
@@ -97,8 +93,7 @@ export function Footer() {
                 ))}
               </ul>
             </div>
-
-            {/* Contact Info */}
+            
             <div>
               <h4 className="font-bold text-foreground mb-6 text-lg">Contact Info</h4>
               <ul className="space-y-4">
@@ -124,7 +119,6 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Bottom Bar */}
           <div className="border-t border-foreground/10 pt-8">
             <div className="flex flex-col md:flex-row justify-between items-center gap-4">
               <p className="text-muted-foreground text-sm">
@@ -145,8 +139,6 @@ export function Footer() {
           </div>
         </div>
       </footer>
-
-      {/* Floating WhatsApp Button */}
       <a
         href="https://wa.me/1234567890"
         target="_blank"

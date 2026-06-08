@@ -17,7 +17,7 @@ export default function BlogDetail({ params }: { params: { id: string } }) {
       setLoading(false);
     }
     fetchBlog();
-    window.scrollTo(0, 0); // Page ke top par scroll karega
+    window.scrollTo(0, 0); 
   }, [params.id]);
 
   if (loading) return (
@@ -38,7 +38,7 @@ export default function BlogDetail({ params }: { params: { id: string } }) {
       <Header />
       
       <div className="container mx-auto px-4 max-w-4xl">
-        {/* Navigation & Actions */}
+        
         <div className="flex justify-between items-center mb-10">
           <Link href="/blog" className="inline-flex items-center gap-2 text-gray-500 hover:text-gold transition-all font-bold group">
             <ArrowLeft size={18} className="group-hover:-translate-x-1 transition-transform" /> 
@@ -50,7 +50,7 @@ export default function BlogDetail({ params }: { params: { id: string } }) {
           </div>
         </div>
 
-        {/* 1. Category & Date */}
+        
         <div className="flex items-center gap-4 mb-6">
           <span className="bg-blue-600 text-white px-4 py-1.5 rounded-xl text-[10px] font-black uppercase tracking-widest">
             {blog.category}
@@ -61,12 +61,12 @@ export default function BlogDetail({ params }: { params: { id: string } }) {
           </span>
         </div>
 
-        {/* 2. Main Title */}
+        
         <h1 className="text-4xl md:text-7xl font-black mb-10 leading-[1.1] tracking-tighter italic">
           {blog.title}
         </h1>
 
-        {/* 3. Author & Read Time Info */}
+        
         <div className="flex items-center gap-6 mb-12 p-6 bg-white/[0.02] border border-white/5 rounded-3xl">
           <div className="w-12 h-12 rounded-full bg-gold/20 border border-gold/50 flex items-center justify-center text-gold font-black">
              {blog.author?.charAt(0) || 'V'}
@@ -83,7 +83,7 @@ export default function BlogDetail({ params }: { params: { id: string } }) {
           </div>
         </div>
 
-        {/* 4. Featured Image */}
+        
         <div className="relative rounded-[3rem] overflow-hidden border border-white/10 mb-16 shadow-2xl shadow-blue-500/10">
           <img 
             src={blog.image_url} 
@@ -93,14 +93,14 @@ export default function BlogDetail({ params }: { params: { id: string } }) {
           <div className="absolute inset-0 bg-gradient-to-t from-[#060610]/40 to-transparent pointer-events-none" />
         </div>
 
-        {/* 5. Article Body (CLEAN TYPOGRAPHY) */}
+       
         <div className="relative">
-            {/* Short Excerpt highlight */}
+            
             <p className="text-2xl text-gold font-bold italic mb-12 border-l-4 border-gold pl-8 leading-relaxed opacity-90">
                 {blog.excerpt}
             </p>
 
-            {/* Main Content Content */}
+            
             <div className="prose prose-invert max-w-none">
               <div className="text-gray-300 text-xl leading-[1.8] space-y-8 whitespace-pre-wrap font-medium selection:bg-gold selection:text-black">
                 {blog.content}
@@ -108,7 +108,7 @@ export default function BlogDetail({ params }: { params: { id: string } }) {
             </div>
         </div>
 
-        {/* Bottom Navigation */}
+       
         <div className="mt-20 pt-10 border-t border-white/5 text-center">
             <p className="text-gray-500 text-sm mb-6">Enjoyed this article? Share it with your network!</p>
              <Link href="/blog">

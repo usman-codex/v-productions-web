@@ -43,20 +43,17 @@ export function GlobalLocations() {
 
   return (
     <section id="contact" className="py-24 relative overflow-hidden">
-      {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-b from-card via-background to-card" />
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-            Our <span className="gradient-text">Global Presence</span>
-          </h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Our <span className="gradient-text">Global Presence</span></h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
             Serving clients across the globe from our strategic locations
           </p>
         </div>
 
-        {/* Location Cards */}
+       
         <div className="grid md:grid-cols-3 gap-6 mb-20">
           {locations.map((location, index) => (
             <div
@@ -113,9 +110,7 @@ export function GlobalLocations() {
           ))}
         </div>
 
-        {/* Strategic Partners & Google Map */}
         <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Partner Info */}
           <div className="space-y-6">
             <h3 className="text-2xl md:text-3xl font-bold text-foreground">
               Strategic <span className="text-blue-electric">Partners</span>
@@ -136,7 +131,6 @@ export function GlobalLocations() {
             </div>
           </div>
 
-          {/* REAL GOOGLE MAP INTEGRATION */}
           <div className="relative">
             <div className="aspect-[4/3] rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
               <iframe 
@@ -149,7 +143,6 @@ export function GlobalLocations() {
                 referrerPolicy="no-referrer-when-downgrade"
               />
             </div>
-            
           </div>
         </div>
       </div>

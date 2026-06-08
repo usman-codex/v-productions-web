@@ -2,7 +2,7 @@
 import { MessageCircle } from "lucide-react";
 
 export function WhatsAppButton() {
-  const phoneNumber = "923001234567"; // Admin isse badal sakta hai
+  const phoneNumber = "923001234567"; 
 
   return (
     <a

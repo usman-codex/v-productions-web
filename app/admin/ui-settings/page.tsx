@@ -19,28 +19,24 @@ export default function HeroCMS() {
     setLoading(false);
   }
 
-  // IMAGE UPLOAD LOGIC
   const handleUpload = async () => {
     if (!selectedFile) return alert("Please select an image first!");
     setIsUploading(true);
 
     try {
-      // 1. Upload to Supabase Storage
       const fileName = `${Date.now()}-${selectedFile.name}`;
       const { data: storageData, error: storageError } = await supabase.storage
-        .from('hero_slider') // Bucket name
+        .from('hero_slider')
         .upload(fileName, selectedFile);
 
       if (storageError) throw storageError;
 
-      // 2. Get Public URL
       const { data: urlData } = supabase.storage
         .from('hero_slider')
         .getPublicUrl(fileName);
 
       const publicUrl = urlData.publicUrl;
 
-      // 3. Save URL to Database table
       const { error: dbError } = await supabase
         .from('hero_images')
         .insert([{ url: publicUrl }]);
@@ -60,7 +56,6 @@ export default function HeroCMS() {
   async function deleteImage(id: number, url: string) {
     if (!confirm("Delete this image?")) return;
     
-    // Extract file name from URL to delete from storage too
     const fileName = url.split('/').pop();
     
     try {
@@ -74,7 +69,6 @@ export default function HeroCMS() {
 
   return (
     <div className="p-4 md:p-10 space-y-10 bg-[#060610] min-h-screen text-white">
-      {/* Header */}
       <div className="flex flex-col md:flex-row justify-between items-center bg-[#0d0d1a] p-8 rounded-[2.5rem] border border-white/5 gap-6 shadow-2xl">
         <div className="flex items-center gap-4">
           <div className="bg-gold/10 p-4 rounded-2xl">
@@ -91,7 +85,6 @@ export default function HeroCMS() {
       </div>
 
       <div className="grid lg:grid-cols-3 gap-10">
-        {/* UPLOAD SECTION */}
         <div className="lg:col-span-1">
           <div className="bg-[#0d0d1a] p-8 rounded-[3rem] border border-white/5 space-y-6 sticky top-10">
             <h2 className="text-xl font-bold flex items-center gap-2 text-gold">
@@ -140,7 +133,6 @@ export default function HeroCMS() {
           </div>
         </div>
 
-        {/* LIST SECTION */}
         <div className="lg:col-span-2 space-y-6">
           <h2 className="text-xl font-bold flex items-center gap-2 px-2">
             <ImageIcon className="text-blue-400" size={20} /> Slider Gallery ({images.length})

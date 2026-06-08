@@ -5,7 +5,7 @@ import { Footer } from "@/components/footer";
 import { supabase } from "@/lib/supabase";
 import { ChevronDown, GraduationCap, Briefcase, CheckCircle, X, Loader2, UploadCloud, Clock, Target, Award, Rocket, Users, Code2, Database, Palette, BarChart3, Smartphone, Layers } from "lucide-react";
 export const dynamic = "force-dynamic";
-// Themes Mapping
+
 const cardThemes: any = {
   purple: { bg: "bg-[#4f46e5]", tagBg: "bg-[#1e1b4b]", tagText: "text-[#818cf8]", icon: Code2 },
   gold: { bg: "bg-[#fbbf24]", tagBg: "bg-[#451a03]", tagText: "text-[#fbbf24]", icon: Database },
@@ -18,23 +18,23 @@ const cardThemes: any = {
 export default function InternshipPage() {
   const [internships, setInternships] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
-  const [expandedId, setExpandedId] = useState<string | null>(null); // State for individual expansion
+  const [expandedId, setExpandedId] = useState<string | null>(null); 
   const [showForm, setShowForm] = useState(false);
   const [selectedRole, setSelectedRole] = useState("");
   const [selectedFile, setSelectedFile] = useState<string>("");
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isGlobalOpen, setIsGlobalOpen] = useState(false); // Global Status
+  const [isGlobalOpen, setIsGlobalOpen] = useState(false); 
 
   useEffect(() => { fetchData(); }, []);
 
   async function fetchData() {
     setLoading(true);
     try {
-      // 1. Fetch Global Status from DB
+     
       const { data: status } = await supabase.from('global_settings').select('value').eq('key', 'internship_status').single();
       if (status) setIsGlobalOpen(status.value === 'open');
 
-      // 2. Fetch Internship Cards
+      
       const { data } = await supabase.from('internships').select('*').order('created_at', { ascending: false });
       if (data) setInternships(data);
     } catch (error) {
@@ -74,12 +74,12 @@ export default function InternshipPage() {
   };
 
   return (
-    <main className="min-h-screen bg-[#060610] text-white pt-32"> {/* Spacing Fix for Navbar */}
+    <main className="min-h-screen bg-[#060610] text-white pt-32"> 
       <Header />
       
-      {/* 1. Hero Section */}
+  
       <section className="pb-20 text-center container mx-auto px-4">
-        {/* Horizontal Circle Status Badge */}
+       
         <div className={`inline-flex items-center gap-2 px-5 py-2 rounded-full border mb-8 transition-all duration-500 ${isGlobalOpen && internships.length > 0 ? 'bg-green-500/10 border-green-500/30 text-green-400' : 'bg-red-500/10 border-red-500/30 text-red-400'}`}>
             <span className={`w-2.5 h-2.5 rounded-full ${isGlobalOpen && internships.length > 0 ? 'bg-green-500 animate-pulse' : 'bg-red-500'}`}></span>
             <span className="text-xs font-bold uppercase tracking-[0.2em]">
@@ -93,7 +93,7 @@ export default function InternshipPage() {
         </p>
       </section>
 
-      {/* 2. Grid (Conditional Display) */}
+    
       <div className="container mx-auto px-4 pb-20">
         {loading ? (
             <div className="flex justify-center py-20"><Loader2 className="animate-spin text-gold" size={40}/></div>
@@ -105,7 +105,7 @@ export default function InternshipPage() {
               const isExpanded = expandedId === pos.id;
               return (
                 <div key={pos.id} className="rounded-3xl overflow-hidden border border-white/5 bg-[#0d0d1a] flex flex-col group transition-all hover:border-white/10">
-                  {/* Card Header */}
+                  
                   <div className={`${theme.bg} p-6 flex items-center gap-5`}>
                      <div className="bg-white/20 p-4 rounded-2xl backdrop-blur-md">
                         <IconComp size={32} className="text-white"/>
@@ -116,9 +116,9 @@ export default function InternshipPage() {
                      </div>
                   </div>
 
-                  {/* Card Body */}
+                  
                   <div className="p-6 flex flex-col h-full">
-                    {/* Tags */}
+                   
                     <div className="flex flex-wrap gap-2 mb-4">
                         {pos.skills?.map((s:string) => (
                            <span key={s} className={`text-[11px] font-bold px-4 py-2 rounded-full uppercase tracking-widest ${theme.tagBg} ${theme.tagText}`}>
@@ -135,22 +135,22 @@ export default function InternshipPage() {
                       <ChevronDown className={`transition-transform duration-500 ${isExpanded ? 'rotate-180' : ''}`} />
                     </button>
 
-                    {/* Expandable Details */}
+                  
                     <div className={`overflow-hidden transition-all duration-700 ${isExpanded ? 'max-h-[1500px] opacity-100 mt-10' : 'max-h-0 opacity-0'}`}>
                         <div className="space-y-10">
-                            {/* Eligibility */}
+                           
                             <div className="space-y-4">
                                 <h4 className="text-gold font-bold flex items-center gap-2 uppercase text-[11px] tracking-[0.2em]"><GraduationCap size={18}/> Eligibility</h4>
                                 {pos.eligibility?.map((e: string) => <p key={e} className="flex gap-4 text-sm text-gray-400 leading-relaxed"><CheckCircle className="text-gold shrink-0 mt-0.5" size={18}/> {e}</p>)}
                             </div>
                             
-                            {/* What You Will Do */}
+                           
                             <div className="space-y-4">
                                 <h4 className="text-blue-400 font-bold flex items-center gap-2 uppercase text-[11px] tracking-[0.2em]"><Target size={18}/> What You Will Do</h4>
                                 {pos.tasks?.map((t: string) => <p key={t} className="flex gap-4 text-sm text-gray-400 leading-relaxed"><CheckCircle className="text-blue-400 shrink-0 mt-0.5" size={18}/> {t}</p>)}
                             </div>
 
-                            {/* Dynamic Benefits */}
+                            
                             <div className="space-y-4">
                                 <h4 className="text-green-400 font-bold flex items-center gap-2 uppercase text-[11px] tracking-[0.2em]"><Award size={18}/> Benefits</h4>
                                 {pos.benefits?.map((b: string) => (
@@ -167,7 +167,7 @@ export default function InternshipPage() {
             })}
           </div>
         ) : (
-          /* Coming Soon Message */
+         
           <div className="max-w-2xl mx-auto text-center py-32 bg-[#0d0d1a] rounded-[4rem] border border-white/5 relative overflow-hidden">
              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-gold/50 to-transparent"></div>
              <h2 className="text-4xl font-black text-white mb-4 italic">Waiting... Coming Soon!</h2>
@@ -176,7 +176,7 @@ export default function InternshipPage() {
         )}
       </div>
 
-      {/* 3. Bottom Static Benefits Grid */}
+      
       <section className="container mx-auto px-4 py-24 border-t border-white/5">
         <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-8">
             {[
@@ -196,7 +196,7 @@ export default function InternshipPage() {
         </div>
       </section>
 
-      {/* 4. Enrollment Form Popup */}
+     
       {showForm && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/95 backdrop-blur-md">
           <div className="bg-[#0d0d1a] w-full max-w-2xl rounded-[2.5rem] p-10 md:p-16 relative border border-white/10 overflow-y-auto max-h-[90vh]">

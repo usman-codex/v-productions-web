@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import Link from "next/link"; // Link import kiya gaya hai navigation ke liye
+import Link from "next/link"; 
 
 const benefits = [
   "Real-world project experience with industry mentors",
@@ -15,12 +15,12 @@ const benefits = [
 export function InternshipSection() {
   return (
     <section id="internship" className="py-24 relative overflow-hidden">
-      {/* Background Gradient */}
+     
       <div className="absolute inset-0 bg-gradient-to-r from-purple-deep/30 via-background to-blue-electric/20" />
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Content */}
+       
           <div className="space-y-6">
             <div className="inline-block px-4 py-1 rounded-full bg-gold/10 border border-gold/30">
               <span className="text-gold font-semibold text-sm">Now Accepting Applications</span>
@@ -57,7 +57,7 @@ export function InternshipSection() {
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
-              {/* Apply Now button ab Internship page par le jayega */}
+              
               <Link href="/internship">
                 <Button
                   size="lg"
@@ -67,15 +67,15 @@ export function InternshipSection() {
                 </Button>
               </Link>
               
-              {/* View Program Details button remove kar diya gaya hai */}
+              
             </div>
           </div>
 
-          {/* Rotating Badge */}
+      
           <div className="relative flex items-center justify-center">
-            {/* Main Badge */}
+           
             <div className="relative w-72 h-72 md:w-96 md:h-96">
-              {/* Rotating Circle with Text */}
+             
               <div className="absolute inset-0 animate-rotate-badge">
                 <svg className="w-full h-full" viewBox="0 0 200 200">
                   <defs>
@@ -92,7 +92,7 @@ export function InternshipSection() {
                 </svg>
               </div>
 
-              {/* Center Content */}
+             
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="w-48 h-48 md:w-64 md:h-64 rounded-full bg-gradient-to-br from-gold/20 to-gold/5 border border-gold/30 flex flex-col items-center justify-center golden-glow">
                   <span className="text-5xl md:text-6xl font-bold text-gold">100%</span>
@@ -102,7 +102,7 @@ export function InternshipSection() {
               </div>
             </div>
 
-            {/* Decorative Elements */}
+           
             <div className="absolute -top-4 -right-4 w-8 h-8 bg-blue-electric rounded-full animate-float" />
             <div className="absolute -bottom-4 -left-4 w-6 h-6 bg-purple-light rounded-full animate-float" style={{ animationDelay: "1s" }} />
             <div className="absolute top-1/2 -right-8 w-4 h-4 bg-gold rounded-full animate-float" style={{ animationDelay: "0.5s" }} />

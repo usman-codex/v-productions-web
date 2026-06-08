@@ -55,13 +55,13 @@ const valueCards = [
 export function TrustSection() {
   return (
     <section className="py-24 relative overflow-hidden">
-      {/* Background */}
+      
       <div className="absolute inset-0 bg-gradient-to-b from-background via-card to-background" />
 
       <div className="container mx-auto px-4 relative z-10">
-        {/* Why Trust Us */}
+        
         <div className="grid lg:grid-cols-2 gap-12 items-center mb-20">
-          {/* Description */}
+         
           <div className="space-y-6">
             <h2 className="text-3xl md:text-4xl font-bold text-foreground">
               Why <span className="gradient-text">Trust Us</span>?
@@ -85,7 +85,7 @@ export function TrustSection() {
             </div>
           </div>
 
-          {/* Stats Grid */}
+          
           <div className="grid grid-cols-2 gap-4">
             {trustStats.map((stat, index) => (
               <div
@@ -101,7 +101,6 @@ export function TrustSection() {
           </div>
         </div>
 
-        {/* Why Choose Us */}
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
             Why <span className="text-blue-electric">Choose</span> V-Productions?
@@ -111,7 +110,7 @@ export function TrustSection() {
           </p>
         </div>
 
-        {/* Value Cards Grid */}
+        
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {valueCards.map((card, index) => (
             <div

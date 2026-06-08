@@ -48,7 +48,7 @@ export function TrainingServices() {
 
   return (
     <section id="training" className="py-24 bg-card relative overflow-hidden">
-      {/* Background */}
+   
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-electric/10 rounded-full blur-3xl" />
       <div className="absolute top-20 right-0 w-72 h-72 bg-purple-deep/15 rounded-full blur-3xl" />
 
@@ -73,7 +73,7 @@ export function TrainingServices() {
               onMouseEnter={() => setHoveredCard(index)}
               onMouseLeave={() => setHoveredCard(null)}
             >
-              {/* Default State */}
+              
               <div
                 className={cn(
                   "glass p-8 h-48 transition-all duration-500",
@@ -89,7 +89,7 @@ export function TrainingServices() {
                 <p className="text-muted-foreground">{service.shortDesc}</p>
               </div>
 
-              {/* Hover State */}
+             
               <div
                 className={cn(
                   "absolute inset-0 bg-gradient-to-br from-purple-deep to-blue-electric p-8 flex flex-col justify-between transition-all duration-500",

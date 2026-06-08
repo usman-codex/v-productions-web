@@ -232,17 +232,16 @@ export default function ServicesPage() {
     <div className="min-h-screen bg-background">
       <Header />
 
-      {/* Hero Section */}
-      {/* Hero Section */}
+      
       <section
         ref={heroRef}
         className="relative min-h-[60vh] flex items-center justify-center overflow-hidden pt-32 pb-20"
       >
-        {/* Background */}
+       
         <div className="absolute inset-0 bg-gradient-to-br from-purple-deep via-background to-background" />
         <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-10" />
         
-        {/* Animated orbs */}
+        
         <div className="absolute top-20 left-10 w-72 h-72 bg-blue-electric/20 rounded-full blur-3xl animate-pulse" />
         <div className="absolute bottom-20 right-10 w-96 h-96 bg-purple-light/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: "1s" }} />
 
@@ -271,7 +270,7 @@ export default function ServicesPage() {
               transform businesses and drive measurable results across industries.
             </p>
 
-            {/* Link added here */}
+            
             <Link href="/contact">
               <Button
                 size="lg"
@@ -285,7 +284,7 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* Categorized Services Grid */}
+      
       <section className="py-20 relative">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
@@ -300,14 +299,14 @@ export default function ServicesPage() {
           <div className="space-y-16">
             {serviceCategories.map((category, catIndex) => (
               <div key={catIndex}>
-                {/* Category Header */}
+               
                 <div className="flex items-center gap-4 mb-8">
                   <div className={`h-1 w-16 rounded-full bg-gradient-to-r ${category.color}`} />
                   <h3 className="text-2xl font-bold text-foreground">{category.title}</h3>
                   <div className={`h-1 flex-1 rounded-full bg-gradient-to-r ${category.color} opacity-30`} />
                 </div>
 
-                {/* Service Cards */}
+               
                 <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
                   {category.services.map((service, index) => (
                     <Link
@@ -315,7 +314,7 @@ export default function ServicesPage() {
                       href={`/services/${service.slug}`}
                       className={`group relative p-6 rounded-2xl glass border ${category.borderColor} hover:border-gold/50 transition-all duration-500 hover:scale-[1.02] hover:shadow-xl hover:shadow-gold/10`}
                     >
-                      {/* Glow effect on hover */}
+                     
                       <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-gold/0 to-gold/0 group-hover:from-gold/5 group-hover:to-transparent transition-all duration-500" />
                       
                       <div className="relative z-10">
@@ -345,7 +344,7 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* Technology Expertise Grid */}
+      
       <section className="py-20 bg-purple-deep/20">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
@@ -365,14 +364,14 @@ export default function ServicesPage() {
                 className="group cursor-pointer"
               >
                 <div className="relative overflow-hidden rounded-2xl transition-all duration-300 hover:scale-105 hover:shadow-2xl">
-                  {/* Header with thick colored bar */}
+                 
                   <div
                     className={`${category.headerColor} h-16 rounded-t-2xl flex items-center justify-center transition-all duration-300 group-hover:shadow-lg ${category.glowColor}`}
                   >
                     <h3 className="text-xl font-bold text-white">{category.title}</h3>
                   </div>
                   
-                  {/* Body with dark background */}
+                  
                   <div className="bg-[#1a1a2e] rounded-b-2xl p-6 border-x border-b border-foreground/10">
                     <ul className="space-y-3">
                       {category.technologies.map((tech, techIndex) => (
@@ -389,7 +388,7 @@ export default function ServicesPage() {
                     </ul>
                   </div>
                   
-                  {/* Hover glow overlay */}
+                  
                   <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none border-2 border-gold/30" />
                 </div>
               </Link>
@@ -398,7 +397,7 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* Tech Stack Marquee */}
+     
       <section className="py-16 bg-purple-deep/30 overflow-hidden">
         <div className="container mx-auto px-4 mb-8">
           <h2 className="text-2xl font-bold text-foreground text-center">
@@ -407,11 +406,11 @@ export default function ServicesPage() {
         </div>
         
         <div className="relative">
-          {/* Fade edges */}
+         
           <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-background to-transparent z-10" />
           <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-background to-transparent z-10" />
           
-          {/* Marquee Row 1 */}
+          
           <div className="flex animate-marquee mb-4">
             {[...techLogos, ...techLogos].map((tech, index) => (
               <div
@@ -423,7 +422,7 @@ export default function ServicesPage() {
             ))}
           </div>
           
-          {/* Marquee Row 2 (reverse) */}
+         
           <div className="flex animate-marquee-reverse">
             {[...techLogos.slice().reverse(), ...techLogos.slice().reverse()].map((tech, index) => (
               <div
@@ -437,7 +436,7 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* Industry Verticals */}
+      
       <section className="py-20">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
@@ -455,7 +454,7 @@ export default function ServicesPage() {
                 key={index}
                 className="group relative p-8 rounded-3xl glass border border-foreground/10 hover:border-gold/30 transition-all duration-500 overflow-hidden"
               >
-                {/* Background gradient */}
+                
                 <div className={`absolute inset-0 bg-gradient-to-br ${vertical.color} opacity-0 group-hover:opacity-5 transition-opacity duration-500`} />
                 
                 <div className="relative z-10">
@@ -488,7 +487,6 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* CTA Section */}
       <section className="py-20 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-purple-deep via-blue-electric/20 to-purple-deep" />
         <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-10" />

@@ -6,7 +6,7 @@ import { Menu, X, Mail, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-// Updated navLinks with Portfolio and Blog
+
 const navLinks = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About Us" },
@@ -48,8 +48,7 @@ export function Header() {
   }, [lastScrollY]);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50">
-      {/* Top Bar */}
+    <header className="fixed top-0 left-0 right-0 z-50"> 
       <div
         className={cn(
           "bg-purple-deep/90 backdrop-blur-sm transition-all duration-300 overflow-hidden",
@@ -86,7 +85,6 @@ export function Header() {
         </div>
       </div>
 
-      {/* Main Navigation */}
       <nav
         className={cn(
           "glass-strong transition-all duration-300",
@@ -94,7 +92,6 @@ export function Header() {
         )}
       >
         <div className="container mx-auto px-4 flex items-center justify-between">
-          {/* Logo */}
           <Link href="/" className="flex items-center gap-2">
             <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-gold to-gold-dark flex items-center justify-center">
               <span className="text-accent-foreground font-bold text-lg">V</span>
@@ -107,7 +104,6 @@ export function Header() {
             </div>
           </Link>
 
-          {/* Desktop Navigation */}
           <div className="hidden xl:flex items-center gap-6">
             {navLinks.map((link) => (
               <Link
@@ -120,7 +116,6 @@ export function Header() {
             ))}
           </div>
 
-          {/* CTA Button */}
           <div className="hidden md:block">
             <Link href="/contact">
               <Button className="bg-gold text-accent-foreground hover:bg-gold-light font-semibold">
@@ -129,7 +124,6 @@ export function Header() {
             </Link>
           </div>
 
-          {/* Mobile Menu Button */}
           <button
             className="xl:hidden text-foreground"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -142,8 +136,6 @@ export function Header() {
             )}
           </button>
         </div>
-
-        {/* Mobile Menu */}
         <div
           className={cn(
             "xl:hidden overflow-hidden transition-all duration-300",
