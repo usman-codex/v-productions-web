@@ -1,4 +1,3 @@
-
 "use client";
 import { useState, useEffect } from "react";
 import { supabase } from "@/lib/supabase";
@@ -7,7 +6,7 @@ import {
   Code, Palette, Globe, Layers, Search , ArrowRight
 } from "lucide-react";
 import { Header } from "@/components/header";
-import { Footer } from "react-day-picker";
+import { Footer } from "@/components/footer";
 
 const awards = [
   { name: "Top Tech Agency 2024", img: "/awards/agency-2024.jpg" },
